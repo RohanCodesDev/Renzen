@@ -77,6 +77,12 @@
   color: var(--brown-mid);
   transition: all var(--t-fast);
   border: 1px solid rgba(255,255,255,0.6);
+  opacity: 0;
+  pointer-events: none;
+}
+.card:hover .wishlistBtn {
+  opacity: 1;
+  pointer-events: auto;
 }
 .wishlistBtn:hover {
   background: white;
@@ -86,6 +92,8 @@
 .wishlistBtn.wishlisted {
   color: var(--orange);
   background: white;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Quick Add Overlay */
@@ -96,13 +104,8 @@
   width: 100%;
   padding: 1rem;
   background: linear-gradient(to top, rgba(44,30,22,0.6), transparent);
-  transform: translateY(100%);
-  transition: transform var(--t-mid);
   display: flex;
   justify-content: center;
-}
-.card:hover .overlay {
-  transform: translateY(0);
 }
 
 .addBtn {

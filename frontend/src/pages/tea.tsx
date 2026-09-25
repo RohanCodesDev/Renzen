@@ -15,6 +15,7 @@ export default function TeaPage() {
 
       <main className={styles.splitLayout}>
         <section className={styles.stickyHero}>
+          {/* 
           <Image
             src="/hero-tea.jpg"
             alt="Misty tea estate at golden hour"
@@ -22,12 +23,14 @@ export default function TeaPage() {
             className={styles.heroBg}
             priority
             unoptimized
-          />
+          /> 
+          */}
+          <div className={styles.noisyDarkGreen} />
           <div className={styles.heroOverlay} />
           
           <div className={styles.heroContent}>
             <span className={styles.heroEyebrow}>Our Curation</span>
-            <h1 className={styles.title}>The Tea<br/>Collection.</h1>
+            <h1 className={styles.title}>The <span className={styles.cursiveText}>Tea</span><br/>Collection.</h1>
             <p className={styles.subtitle}>
               From the misty hills of Darjeeling to the vibrant matcha fields of Uji. 
               Sourced directly from organic estates for the perfect brew.

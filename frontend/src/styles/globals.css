@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
 /* ========================================
    DESIGN TOKENS
@@ -29,6 +30,7 @@
   /* Typography */
   --font-display: 'Josefin Sans', sans-serif;
   --font-body:    'Josefin Sans', sans-serif;
+  --font-cursive: 'Great Vibes', cursive;
 
   /* Spacing */
   --sp-xs: 0.5rem;

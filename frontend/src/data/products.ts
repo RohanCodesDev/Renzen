@@ -55,5 +55,6 @@ export const PRODUCTS: Product[] = [
     price: 449,
     image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80',
     hoverImage: 'https://images.unsplash.com/photo-1517701550927-30cfcb64ac45?w=600&q=80',
+    category: 'Coffee',
   }
 ];

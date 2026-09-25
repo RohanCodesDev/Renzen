@@ -27,6 +27,27 @@
   opacity: 0.85;
 }
 
+.noisyDarkGreen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0d2818;
+}
+
+.noisyDarkGreen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/e31b9f015186e72424e4b3d767503186.jpg');
+  background-size: 250px;
+  background-repeat: repeat;
+  background-position: top left;
+  opacity: 0.2;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
 .heroOverlay {
   position: absolute;
   inset: 0;
@@ -60,6 +81,13 @@
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
   color: var(--white);
+}
+
+.cursiveText {
+  font-family: var(--font-cursive);
+  font-weight: 400;
+  font-size: 1.45em; /* increased slightly to match the sweep */
+  color: var(--white); 
 }
 
 .subtitle {
