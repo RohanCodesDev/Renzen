@@ -312,15 +312,36 @@ export default function TeaProducts() {
     setExpandedCats(prev => ({ ...prev, [title]: !prev[title] }));
   };
 
+  const scrollToCategory = (title: string) => {
+    const el = document.getElementById(`category-${title.replace(/\s+/g, '-')}`);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className={styles.container}>
+      <div className={styles.stickyNavWrapper}>
+        <div className={styles.navScroll}>
+          {TEA_CATEGORIES.map(cat => (
+            <button
+              key={cat.title}
+              onClick={() => scrollToCategory(cat.title)}
+              className={styles.navPill}
+            >
+              {cat.title.replace('Darjeeling ', '')}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {TEA_CATEGORIES.map((cat, index) => {
         const isExpanded = expandedCats[cat.title];
         const displayedProducts = isExpanded ? cat.products : cat.products.slice(0, 3);
 
         return (
           <React.Fragment key={cat.title}>
-            <div className={styles.categorySection}>
+            <div id={`category-${cat.title.replace(/\s+/g, '-')}`} className={styles.categorySection}>
               <div className={styles.categoryHeaderWrapper}>
                 <div className={styles.categoryHeaderTop}>
                   <h2 className={styles.categoryTitle}>{cat.title}</h2>

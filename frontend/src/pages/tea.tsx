@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 import TeaProducts from '@/components/ui/TeaProducts';
 import styles from '@/styles/Category.module.css';
 export default function TeaPage() {
@@ -43,6 +44,8 @@ export default function TeaPage() {
           <TeaProducts />
         </section>
       </main>
+
+      <Footer />
     </>
   );
 }
