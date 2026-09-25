@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Marquee from '@/components/ui/Marquee';
 import ProductCard, { Product } from '@/components/ui/ProductCard';
@@ -89,6 +90,13 @@ export default function Home() {
   const featRef     = useScrollReveal();
   const newsRef     = useScrollReveal();
   const { revealed, activeLine } = useTypewriter();
+  
+  const [activeCategory, setActiveCategory] = useState('All');
+  const FILTER_CATEGORIES = ['All', 'Tea', 'Coffee', 'Organic', 'Matcha'];
+  
+  const filteredProducts = activeCategory === 'All' 
+    ? PRODUCTS 
+    : PRODUCTS.filter(p => p.category === activeCategory);
 
   return (
     <>
@@ -101,7 +109,7 @@ export default function Home() {
 
       <Navbar />
 
-      <main>
+      <main className={styles.mainWrapper}>
         {/* ── HERO BENTO ───────────────────────────────────────────── */}
         <section className={styles.hero}>
           <div className={`container ${styles.bentoCont}`}>
@@ -239,10 +247,23 @@ export default function Home() {
               </div>
               <button className="btn btn-text hide-mobile">See All Products →</button>
             </div>
+            
+            {/* Category Filter Toggles */}
+            <div className={styles.filterToggles}>
+              {FILTER_CATEGORIES.map(cat => (
+                <button 
+                  key={cat}
+                  className={`btn ${activeCategory === cat ? 'btn-primary' : 'btn-outline'} ${styles.filterBtn}`}
+                  onClick={() => setActiveCategory(cat)}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
 
             {/* Horizontal scroll on mobile, grid on desktop */}
             <div className={styles.productGrid}>
-              {PRODUCTS.map((p) => (
+              {filteredProducts.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}
             </div>

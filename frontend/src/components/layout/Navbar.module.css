@@ -132,3 +132,24 @@
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50%       { transform: translateY(-4px) rotate(5deg); }
 }
+
+@media (max-width: 768px) {
+  .navbar {
+    width: calc(100% - 2rem);
+    padding: 0.6rem 1rem;
+    top: 0.75rem;
+    border-radius: 12px;
+  }
+  .navbar.scrolled {
+    top: 0.5rem;
+  }
+  .inner {
+    gap: 1rem;
+  }
+  .logoText {
+    font-size: 1.35rem;
+  }
+  .shopBtn {
+    display: none !important;
+  }
+}
