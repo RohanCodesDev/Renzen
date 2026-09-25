@@ -321,18 +321,16 @@ export default function TeaProducts() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.stickyNavWrapper}>
-        <div className={styles.navScroll}>
-          {TEA_CATEGORIES.map(cat => (
-            <button
-              key={cat.title}
-              onClick={() => scrollToCategory(cat.title)}
-              className={styles.navPill}
-            >
-              {cat.title.replace('Darjeeling ', '')}
-            </button>
-          ))}
-        </div>
+      <div className={styles.navScroll}>
+        {TEA_CATEGORIES.map(cat => (
+          <button
+            key={cat.title}
+            onClick={() => scrollToCategory(cat.title)}
+            className={styles.navPill}
+          >
+            {cat.title.replace('Darjeeling ', '')}
+          </button>
+        ))}
       </div>
 
       {TEA_CATEGORIES.map((cat, index) => {
