@@ -4,15 +4,28 @@
 }
 
 .categorySection {
-  margin-bottom: 6rem;
+  margin-bottom: 0;
 }
 
-.categoryHeader {
+.categoryHeaderWrapper {
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(3, 30, 16, 0.2);
+}
+
+.categoryHeaderTop {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid rgba(3, 30, 16, 0.2);
+}
+
+.categoryDesc {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--brown-mid);
+  margin: 0.25rem 0 0 0;
+  text-align: left;
 }
 
 .categoryTitle {
@@ -68,16 +81,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 3rem 0 4rem;
+  padding: 1.5rem 0 2.5rem;
 }
 
 .dividerImage {
   object-fit: contain;
-  opacity: 0.85;
+  opacity: 1;
   mix-blend-mode: multiply;
-  /* Removes pure white background */
-  filter: contrast(2) brightness(1.1) grayscale(100%);
-  /* Blows out the paper texture to pure white */
+  transform: scale(1.2); /* make it slightly larger/more visible */
 }
 
 @media (max-width: 768px) {

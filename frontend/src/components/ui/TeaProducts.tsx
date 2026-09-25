@@ -7,6 +7,7 @@ import styles from './TeaProducts.module.css';
 const TEA_CATEGORIES = [
   {
     title: 'Darjeeling First Flush',
+    description: 'The spring harvest, prized for its delicate floral notes and bright, crisp finish.',
     products: [
       {
         id: 101,
@@ -69,6 +70,7 @@ const TEA_CATEGORIES = [
   },
   {
     title: 'Darjeeling Second Flush',
+    description: 'The summer harvest, famous for its rich, full-bodied character and signature muscatel flavor.',
     products: [
       {
         id: 102,
@@ -127,6 +129,7 @@ const TEA_CATEGORIES = [
   },
   {
     title: 'Darjeeling Autumn Flush',
+    description: 'The final harvest of the year, offering a smooth, mellow cup with deep amber hues.',
     products: [
       {
         id: 103,
@@ -183,6 +186,7 @@ const TEA_CATEGORIES = [
   },
   {
     title: 'Darjeeling Green Tea',
+    description: 'Fresh, unoxidized leaves from the high Himalayas, packed with antioxidants and earthy goodness.',
     products: [
       {
         id: 104,
@@ -241,6 +245,7 @@ const TEA_CATEGORIES = [
   },
   {
     title: 'Fruity & Floral Teas',
+    description: 'Vibrant, naturally caffeine-free botanical blends bursting with real fruits and fragrant petals.',
     products: [
       {
         id: 105,
@@ -312,22 +317,27 @@ export default function TeaProducts() {
       {TEA_CATEGORIES.map((cat, index) => {
         const isExpanded = expandedCats[cat.title];
         const displayedProducts = isExpanded ? cat.products : cat.products.slice(0, 3);
-        
+
         return (
           <React.Fragment key={cat.title}>
             <div className={styles.categorySection}>
-              <div className={styles.categoryHeader}>
-                <h2 className={styles.categoryTitle}>{cat.title}</h2>
-                {cat.products.length > 3 && (
-                  <button 
-                    className={styles.viewAllBtn} 
-                    onClick={() => toggleViewAll(cat.title)}
-                  >
-                    {isExpanded ? 'View Less' : 'View All'}
-                  </button>
+              <div className={styles.categoryHeaderWrapper}>
+                <div className={styles.categoryHeaderTop}>
+                  <h2 className={styles.categoryTitle}>{cat.title}</h2>
+                  {cat.products.length > 3 && (
+                    <button
+                      className={styles.viewAllBtn}
+                      onClick={() => toggleViewAll(cat.title)}
+                    >
+                      {isExpanded ? 'View Less' : 'View All'}
+                    </button>
+                  )}
+                </div>
+                {cat.description && (
+                  <p className={styles.categoryDesc}>{cat.description}</p>
                 )}
               </div>
-              
+
               <div className={isExpanded ? styles.productGridExpanded : styles.productGrid}>
                 {displayedProducts.map(p => (
                   <ProductCard key={p.id} product={p as Product} />
@@ -337,6 +347,11 @@ export default function TeaProducts() {
                 )}
               </div>
             </div>
+            {index < TEA_CATEGORIES.length - 1 && (
+              <div className={styles.dividerWrapper}>
+                <Image src="/divider.png" alt="divider" width={1000} height={200} className={styles.dividerImage} unoptimized />
+              </div>
+            )}
           </React.Fragment>
         );
       })}
