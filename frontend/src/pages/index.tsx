@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Marquee from '@/components/ui/Marquee';
 import ProductCard, { Product } from '@/components/ui/ProductCard';
+import MagneticButton from '@/components/ui/MagneticButton';
 import styles from '@/styles/Home.module.css';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { useTypewriter } from '@/hooks/useTypewriter';
@@ -17,6 +18,7 @@ const PRODUCTS: Product[] = [
     price: 449,
     originalPrice: 599,
     image: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1576092762791-dd9e2220d9f4?w=600&q=80',
     badge: 'Best Seller 👑',
     badgeType: 'matcha',
     category: 'Tea',
@@ -28,6 +30,7 @@ const PRODUCTS: Product[] = [
     price: 749,
     originalPrice: 999,
     image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=600&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1582787019808-01e4a2c5a2c9?w=600&q=80',
     badge: 'New Drop 💧',
     badgeType: 'orange',
     category: 'Matcha',
@@ -38,6 +41,7 @@ const PRODUCTS: Product[] = [
     subtitle: 'Bright, blueberry & citrus finish',
     price: 599,
     image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600&q=80',
     badge: 'Organic 🌿',
     badgeType: 'matcha',
     category: 'Coffee',
@@ -49,6 +53,7 @@ const PRODUCTS: Product[] = [
     price: 349,
     originalPrice: 449,
     image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&q=80',
+    hoverImage: 'https://images.unsplash.com/photo-1558227091-aebf6a01bde0?w=600&q=80',
     badge: 'Fan Fav ❤️',
     badgeType: 'orange',
     category: 'Organic',
@@ -136,13 +141,13 @@ export default function Home() {
                   crafted for the mindful generation.
                 </p>
                 <div className={`flex gap-sm ${styles.heroCtas} ${activeLine === -1 ? styles.heroCtasVisible : ''}`}>
-                  <button className="btn btn-primary">
+                  <MagneticButton className="btn btn-primary">
                     Explore Collection
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
-                  </button>
-                  <button className="btn btn-outline">Our Story</button>
+                  </MagneticButton>
+                  <MagneticButton className="btn btn-outline">Our Story</MagneticButton>
                 </div>
               </div>
 
@@ -255,8 +260,9 @@ export default function Home() {
                   key={cat}
                   className={`btn ${activeCategory === cat ? 'btn-primary' : 'btn-outline'} ${styles.filterBtn}`}
                   onClick={() => setActiveCategory(cat)}
+                  style={activeCategory === cat ? { color: 'var(--cream)' } : {}}
                 >
-                  {cat}
+                  <span>{cat}</span>
                 </button>
               ))}
             </div>

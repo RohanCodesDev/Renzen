@@ -11,6 +11,7 @@ export interface Product {
   price: number;
   originalPrice?: number;
   image: string;
+  hoverImage?: string;
   badge?: string;
   badgeType?: 'matcha' | 'orange' | 'cream';
   category: string;
@@ -59,9 +60,18 @@ export default function ProductCard({ product }: Props) {
           src={product.image}
           alt={product.name}
           fill
-          className={styles.image}
+          className={`${styles.image} ${product.hoverImage ? styles.imagePrimary : ''}`}
           unoptimized
         />
+        {product.hoverImage && (
+          <Image
+            src={product.hoverImage}
+            alt={`${product.name} lifestyle`}
+            fill
+            className={`${styles.image} ${styles.imageSecondary}`}
+            unoptimized
+          />
+        )}
 
         {/* Badges */}
         <div className={styles.badges}>

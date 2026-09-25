@@ -1,0 +1,22 @@
+.magneticBtn {
+  transition: transform 0.1s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* Remove transition on hover so the JS can update it freely */
+.magneticBtn:hover {
+  transition: transform 0s;
+}
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+  pointer-events: none; /* Let the button handle events */
+}
+
+.magneticBtn:hover .content {
+  transition: transform 0s;
+}

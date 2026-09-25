@@ -40,6 +40,7 @@
   border-radius: var(--r-lg);
   overflow: hidden;
   position: relative;
+  box-shadow: 0 4px 20px rgba(111, 78, 55, 0.08); /* subtle brown shadow */
   transition: transform var(--t-mid), box-shadow var(--t-mid);
 }
 .bentoCell:hover {
@@ -289,6 +290,7 @@
   transition: all var(--t-mid);
   overflow: hidden;
   border: 1px solid transparent;
+  box-shadow: 0 4px 16px rgba(111, 78, 55, 0.06);
 }
 .categoryCard:hover {
   transform: translateY(-6px);
@@ -354,6 +356,7 @@
   font-size: 0.75rem !important;
   border-radius: var(--r-full) !important;
   flex-shrink: 0; /* prevent buttons from squishing on mobile */
+  box-shadow: 0 2px 12px rgba(111, 78, 55, 0.08);
 }
 .productGrid {
   display: grid;
