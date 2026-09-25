@@ -1,0 +1,39 @@
+.wrapper {
+  width: 100%;
+  overflow: hidden;
+  background: var(--brown-dark);
+  color: var(--cream);
+  padding: 0.75rem 0;
+  /* Fade masks on sides */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  padding: 0 0.5rem;
+}
+
+.dot {
+  color: var(--matcha);
+  font-size: 1.2rem;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

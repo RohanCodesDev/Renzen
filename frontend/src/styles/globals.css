@@ -1,0 +1,444 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,300;1,400&display=swap');
+
+/* ========================================
+   DESIGN TOKENS
+   ======================================== */
+:root {
+  /* Core Palette */
+  --cream:       #FFFDD0;
+  --brown-dark:  #2C1E16;
+  --brown-mid:   #5C3D2E;
+  --matcha:      #74B72E;
+  --matcha-dark: #4a7d1b;
+  --matcha-glow: rgba(116,183,46,0.25);
+  --orange:      #6F4E37;
+  --orange-dark: #4E342E;
+  --orange-glow: rgba(111,78,55,0.2);
+  --cream-dark:  #f0ecb0;
+  --white:       #ffffff;
+
+  /* Backgrounds */
+  --bg:          var(--cream);
+  --bg-card:     #ffffff;
+  --bg-dark:     #1a120b;
+
+  /* Borders */
+  --border:      rgba(44,30,22,0.12);
+  --border-strong: rgba(44,30,22,0.25);
+
+  /* Typography */
+  --font-display: 'Josefin Sans', sans-serif;
+  --font-body:    'Josefin Sans', sans-serif;
+
+  /* Spacing */
+  --sp-xs: 0.5rem;
+  --sp-sm: 1rem;
+  --sp-md: 1.5rem;
+  --sp-lg: 2.5rem;
+  --sp-xl: 5rem;
+  --sp-2xl: 8rem;
+
+  /* Border Radius */
+  --r-sm:  8px;
+  --r-md:  16px;
+  --r-lg:  24px;
+  --r-xl:  40px;
+  --r-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm:  0 2px 8px rgba(44,30,22,0.08);
+  --shadow-md:  0 8px 32px rgba(44,30,22,0.12);
+  --shadow-lg:  0 24px 64px rgba(44,30,22,0.16);
+  --shadow-glow-matcha: 0 8px 32px rgba(116,183,46,0.3);
+  --shadow-glow-orange: 0 8px 32px rgba(111,78,55,0.3);
+
+  /* Transitions */
+  --ease: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --t-fast: 0.2s var(--ease);
+  --t-mid:  0.4s var(--ease);
+  --t-slow: 0.7s var(--ease);
+}
+
+/* ========================================
+   RESET & BASE
+   ======================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--brown-dark);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+ul { list-style: none; }
+
+/* ========================================
+   TYPOGRAPHY
+   ======================================== */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--brown-dark);
+}
+
+.display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+.display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.display-md {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.text-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+.text-body { font-size: 1rem; font-weight: 400; line-height: 1.7; }
+.text-sm { font-size: 0.875rem; }
+.text-lg { font-size: 1.125rem; }
+
+/* ========================================
+   LAYOUT UTILITIES
+   ======================================== */
+.container {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 var(--sp-md);
+}
+
+.section {
+  padding: var(--sp-xl) 0;
+}
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-sm { gap: var(--sp-sm); }
+.gap-md { gap: var(--sp-md); }
+.gap-lg { gap: var(--sp-lg); }
+.text-center { text-align: center; }
+
+/* ========================================
+   BUTTON SYSTEM — Editorial, squared
+   ======================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.8rem 1.75rem;
+  border-radius: 5px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+
+/* Primary — dark fill, cream text */
+.btn-primary {
+  background: var(--brown-dark);
+  color: var(--cream);
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 0;
+}
+.btn-primary span,
+.btn-primary svg { position: relative; z-index: 1; }
+.btn-primary > * { position: relative; z-index: 1; }
+.btn-primary:hover::after { transform: scaleX(1); }
+.btn-primary:active { opacity: 0.9; }
+
+/* Secondary — matcha fill */
+.btn-secondary {
+  background: var(--matcha-dark);
+  color: var(--white);
+}
+.btn-secondary:hover {
+  background: var(--matcha);
+  letter-spacing: 0.16em;
+}
+
+/* Outline — border only, fill on hover */
+.btn-outline {
+  background: transparent;
+  color: var(--brown-dark);
+  border: 1.5px solid var(--brown-dark);
+  padding: calc(0.8rem - 1.5px) calc(1.75rem - 1.5px);
+}
+.btn-outline:hover {
+  background: var(--brown-dark);
+  color: var(--cream);
+}
+
+/* Ghost — for dark backgrounds */
+.btn-ghost {
+  background: transparent;
+  color: var(--brown-dark);
+  border: 1px solid var(--border-strong);
+  border-radius: 5px;
+}
+.btn-ghost:hover {
+  background: var(--brown-dark);
+  color: var(--cream);
+  border-color: var(--brown-dark);
+}
+
+/* Text-only link button */
+.btn-text {
+  background: none;
+  color: var(--brown-dark);
+  padding: 0;
+  border-radius: 0;
+  border-bottom: 1.5px solid currentColor;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.btn-text:hover {
+  opacity: 1;
+  letter-spacing: 0.15em;
+}
+
+/* ========================================
+   BADGE / TAG — Refined label, not pill
+   ======================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
+/* Subtle tinted variants — no harsh fills */
+.badge-matcha {
+  background: rgba(116, 183, 46, 0.1);
+  color: #3a6b12;
+  border: 1px solid rgba(116, 183, 46, 0.3);
+}
+.badge-orange {
+  background: rgba(111, 78, 55, 0.1);
+  color: var(--orange-dark);
+  border: 1px solid rgba(111, 78, 55, 0.25);
+}
+.badge-cream {
+  background: transparent;
+  color: var(--brown-mid);
+  border: 1px solid var(--border-strong);
+}
+.badge-glass {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(8px);
+  color: var(--brown-dark);
+  border: 1px solid rgba(255,255,255,0.8);
+}
+/* Solid variant — used on dark BGs */
+.badge-solid-matcha { background: var(--matcha); color: #fff; border-radius: 4px; }
+.badge-solid-orange { background: var(--orange);  color: #fff; border-radius: 4px; }
+
+/* ========================================
+   CARD BASE
+   ======================================== */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--t-mid);
+}
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px);
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--cream-dark); }
+::-webkit-scrollbar-thumb { background: var(--matcha); border-radius: 99px; }
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.anim-fade-up   { animation: fadeUp  0.7s var(--ease) both; }
+.anim-fade-in   { animation: fadeIn  0.5s var(--ease) both; }
+.anim-scale-in  { animation: scaleIn 0.6s var(--ease-bounce) both; }
+.anim-float     { animation: float   4s ease-in-out infinite; }
+.anim-spin-slow { animation: spin-slow 12s linear infinite; }
+
+/* Stagger helpers */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
+
+/* ========================================
+   GLASS MORPHISM
+   ======================================== */
+.glass {
+  background: rgba(255, 253, 208, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.7);
+}
+
+/* ========================================
+   NOISE TEXTURE OVERLAY
+   ======================================== */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .container { padding: 0 var(--sp-sm); }
+  .section { padding: var(--sp-lg) 0; }
+  .hide-mobile { display: none !important; }
+}
+@media (min-width: 769px) {
+  .hide-desktop { display: none !important; }
+}
+
+/* ========================================
+   SCROLL REVEAL
+   ======================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.65s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-36px);
+  transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger children: add class to parent */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.stagger-children.is-visible > *:nth-child(1) { opacity:1; transform:none; transition-delay: 0.05s; }
+.stagger-children.is-visible > *:nth-child(2) { opacity:1; transform:none; transition-delay: 0.15s; }
+.stagger-children.is-visible > *:nth-child(3) { opacity:1; transform:none; transition-delay: 0.25s; }
+.stagger-children.is-visible > *:nth-child(4) { opacity:1; transform:none; transition-delay: 0.35s; }
+.stagger-children.is-visible > *:nth-child(5) { opacity:1; transform:none; transition-delay: 0.45s; }
+.stagger-children.is-visible > *:nth-child(6) { opacity:1; transform:none; transition-delay: 0.55s; }
+
