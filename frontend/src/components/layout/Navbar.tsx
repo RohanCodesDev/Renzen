@@ -35,10 +35,16 @@ export default function Navbar() {
 
         {/* Nav Links */}
         <ul className={`${styles.links} hide-mobile`}>
-          {['Teas', 'Coffees', 'Organics', 'Bundles', 'Journal'].map((item) => (
-            <li key={item}>
-              <Link href={`/${item.toLowerCase()}`} className={styles.link}>
-                {item}
+          {[
+            { label: 'Teas', href: '/tea' },
+            { label: 'Coffees', href: '/coffees' },
+            { label: 'Organics', href: '/organics' },
+            { label: 'Bundles', href: '/bundles' },
+            { label: 'Journal', href: '/journal' },
+          ].map((item) => (
+            <li key={item.label}>
+              <Link href={item.href} className={styles.link}>
+                {item.label}
               </Link>
             </li>
           ))}

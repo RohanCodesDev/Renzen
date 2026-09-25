@@ -1,0 +1,137 @@
+.splitLayout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.stickyHero {
+  position: sticky;
+  top: 0;
+  width: 45%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem;
+  background: #000;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+  opacity: 0.85;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.08) 100%);
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  color: var(--white);
+  max-width: 400px;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.heroEyebrow {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: block;
+  opacity: 0.8;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.scrollingContent {
+  position: relative;
+  width: 55%;
+  padding: 8rem 4rem 4rem;
+  background: var(--cream);
+}
+
+.scrollingContent::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/e31b9f015186e72424e4b3d767503186.jpg');
+  background-size: 350px; /* Adjust if the tile is too small/big */
+  background-repeat: repeat;
+  background-position: top left;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.scrollingContent > * {
+  position: relative;
+  z-index: 1;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .splitLayout {
+    flex-direction: column;
+  }
+  .stickyHero {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    padding: 3rem 2rem;
+  }
+  .scrollingContent {
+    width: 100%;
+    padding: 4rem 2rem;
+  }
+  .productGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .productGrid {
+    grid-template-columns: 1fr;
+  }
+  .stickyHero {
+    height: 50vh;
+  }
+}
