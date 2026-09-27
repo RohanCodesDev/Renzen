@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
+import { Coffee, Leaf, Sprout, Check } from 'lucide-react';
 import styles from './ProductCard.module.css';
 import { useCart } from '@/context/CartContext';
 import { useToast } from '@/context/ToastContext';
@@ -13,6 +14,7 @@ export interface Product {
   image: string;
   hoverImage?: string;
   badge?: string;
+  badgeIcon?: React.ReactNode;
   badgeType?: 'matcha' | 'orange' | 'cream';
   category: string;
 }
@@ -38,12 +40,15 @@ export default function ProductCard({ product }: Props) {
     setTimeout(() => setBump(false), 400);
 
     // Toast notification
-    const categoryEmoji: Record<string, string> = {
-      Tea: '🍵', Coffee: '☕', Matcha: '🍃', Organic: '🌿',
+    const categoryIcon: Record<string, React.ReactNode> = {
+      Tea: <Leaf size={16} />, 
+      Coffee: <Coffee size={16} />, 
+      Matcha: <Leaf size={16} />, 
+      Organic: <Sprout size={16} />,
     };
     showToast(
       `${product.name} added to cart`,
-      categoryEmoji[product.category] ?? '✓'
+      categoryIcon[product.category] ?? <Check size={16} />
     );
 
     setTimeout(() => setAdded(false), 2000);
@@ -77,6 +82,7 @@ export default function ProductCard({ product }: Props) {
         <div className={styles.badges}>
           {product.badge && (
             <span className={`badge badge-${product.badgeType ?? 'matcha'} ${styles.badge}`}>
+              {product.badgeIcon && <span className={styles.badgeIcon}>{product.badgeIcon}</span>}
               {product.badge}
             </span>
           )}

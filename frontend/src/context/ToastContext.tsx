@@ -5,13 +5,13 @@ import React, { createContext, useContext, useState, useCallback } from 'react';
 export interface ToastMessage {
   id: string;
   message: string;
-  emoji?: string;
+  icon?: React.ReactNode;
   type?: 'success' | 'info' | 'error';
 }
 
 interface ToastContextValue {
   toasts: ToastMessage[];
-  showToast: (message: string, emoji?: string, type?: ToastMessage['type']) => void;
+  showToast: (message: string, icon?: React.ReactNode, type?: ToastMessage['type']) => void;
   removeToast: (id: string) => void;
 }
 
@@ -28,9 +28,9 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     setToasts(prev => prev.filter(t => t.id !== id));
   }, []);
 
-  const showToast = useCallback((message: string, emoji = '✓', type: ToastMessage['type'] = 'success') => {
+  const showToast = useCallback((message: string, icon: React.ReactNode = null, type: ToastMessage['type'] = 'success') => {
     const id = `toast-${Date.now()}`;
-    setToasts(prev => [...prev, { id, message, emoji, type }]);
+    setToasts(prev => [...prev, { id, message, icon, type }]);
 
     // Auto-remove after 3.5s
     setTimeout(() => removeToast(id), 3500);

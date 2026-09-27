@@ -140,3 +140,24 @@
     text-align: center;
   }
 }
+
+/* ── Brown variant (coffee page) ─────────────────── */
+.footer[data-variant='brown'] {
+  background: #1a0a00;
+  border-top-color: rgba(201, 145, 60, 0.2);
+}
+.footer[data-variant='brown'] .brandCol .logo {
+  color: #c9913c;
+}
+.footer[data-variant='brown'] .list a:hover {
+  color: #c9913c;
+}
+.footer[data-variant='brown'] .submitBtn {
+  color: #c9913c;
+}
+.footer[data-variant='brown'] .form {
+  border-bottom-color: rgba(201, 145, 60, 0.3);
+}
+.footer[data-variant='brown'] .legal a:hover {
+  color: #c9913c;
+}

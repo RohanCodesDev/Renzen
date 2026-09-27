@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { ShoppingCart, Leaf, ArrowRight } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import styles from './CartDrawer.module.css';
 
@@ -19,7 +20,7 @@ export default function CartDrawer() {
         {/* Header */}
         <div className={styles.header}>
           <div className={styles.headerLeft}>
-            <span className={styles.headerEmoji}>🛒</span>
+            <span className={styles.headerEmoji}><ShoppingCart size={20} /></span>
             <h2 className={styles.headerTitle}>Your Cart</h2>
             {totalCount > 0 && (
               <span className={styles.headerCount}>{totalCount}</span>
@@ -36,11 +37,11 @@ export default function CartDrawer() {
         <div className={styles.items}>
           {items.length === 0 ? (
             <div className={styles.empty}>
-              <span className={styles.emptyEmoji}>🍵</span>
+              <span className={styles.emptyEmoji}><Leaf size={48} /></span>
               <p className={styles.emptyTitle}>Your cup is empty</p>
               <p className={styles.emptySubtitle}>Add some organic goodness to get started.</p>
               <button className={`btn btn-primary ${styles.emptyBtn}`} onClick={closeCart}>
-                Browse Products →
+                Browse Products <ArrowRight size={16} className="inline-block ml-1 align-text-bottom" />
               </button>
             </div>
           ) : (

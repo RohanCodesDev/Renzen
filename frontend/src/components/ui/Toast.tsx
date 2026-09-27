@@ -22,7 +22,7 @@ function ToastItem({ toast }: { toast: ToastMessage }) {
       className={`${styles.toast} ${styles[toast.type ?? 'success']} ${exiting ? styles.exit : styles.enter}`}
       role="alert"
     >
-      <span className={styles.emoji}>{toast.emoji}</span>
+      <span className={styles.icon}>{toast.icon}</span>
       <span className={styles.message}>{toast.message}</span>
       <button className={styles.close} onClick={dismiss} aria-label="Close">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">

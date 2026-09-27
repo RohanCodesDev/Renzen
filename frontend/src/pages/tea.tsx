@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import TeaProducts from '@/components/ui/TeaProducts';
+import MirrorBackground from '@/components/ui/MirrorBackground';
 import styles from '@/styles/Category.module.css';
 export default function TeaPage() {
   return (
@@ -26,7 +26,9 @@ export default function TeaPage() {
             unoptimized
           /> 
           */}
-          <div className={styles.noisyDarkGreen} />
+          <div className={styles.noisyDarkGreen}>
+            <MirrorBackground src="/e31b9f015186e72424e4b3d767503186.jpg" tileSize={250} opacity={0.2} mixBlendMode="overlay" />
+          </div>
           <div className={styles.heroOverlay} />
           
           <div className={styles.heroContent}>
@@ -41,6 +43,7 @@ export default function TeaPage() {
 
         {/* ── RIGHT: SCROLLING PRODUCTS ──────────────────────────────────────────── */}
         <section className={styles.scrollingContent}>
+          <MirrorBackground src="/e31b9f015186e72424e4b3d767503186.jpg" tileSize={350} opacity={0.08} mixBlendMode="multiply" />
           <TeaProducts />
         </section>
       </main>

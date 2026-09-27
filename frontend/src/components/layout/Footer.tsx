@@ -1,9 +1,14 @@
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import styles from './Footer.module.css';
 
-export default function Footer() {
+interface FooterProps {
+  variant?: 'green' | 'brown';
+}
+
+export default function Footer({ variant = 'green' }: FooterProps) {
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} data-variant={variant}>
       <div className={styles.container}>
         <div className={styles.grid}>
           {/* Brand Info */}
@@ -41,7 +46,7 @@ export default function Footer() {
             <p className={styles.subtext}>Subscribe for early access to rare flushes and new harvests.</p>
             <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
               <input type="email" placeholder="Your email address" className={styles.input} />
-              <button type="submit" className={styles.submitBtn}>→</button>
+              <button type="submit" className={styles.submitBtn}><ArrowRight size={16} /></button>
             </form>
           </div>
         </div>

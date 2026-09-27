@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { Leaf } from 'lucide-react';
 import styles from './Navbar.module.css';
 import { useCart } from '@/context/CartContext';
 
@@ -29,7 +30,7 @@ export default function Navbar() {
       <div className={styles.inner}>
         {/* Logo */}
         <Link href="/" className={styles.logo}>
-          <span className={styles.logoLeaf}>🍃</span>
+          <span className={styles.logoLeaf}><Leaf size={24} color="var(--matcha)" /></span>
           <span className={styles.logoText}>Renzen</span>
         </Link>
 

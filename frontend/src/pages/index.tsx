@@ -7,6 +7,7 @@ import MagneticButton from '@/components/ui/MagneticButton';
 import styles from '@/styles/Home.module.css';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { useTypewriter } from '@/hooks/useTypewriter';
+import { Crown, Droplet, Sprout, Heart, Flame, Leaf, Coffee, Gift, Smile, Star, Package, RefreshCw, Rocket, FlaskConical, MessageSquare, ArrowRight } from 'lucide-react';
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
@@ -19,7 +20,8 @@ const PRODUCTS: Product[] = [
     originalPrice: 599,
     image: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&q=80',
     hoverImage: 'https://images.unsplash.com/photo-1576092762791-dd9e2220d9f4?w=600&q=80',
-    badge: 'Best Seller 👑',
+    badge: 'Best Seller',
+    badgeIcon: <Crown size={14} />,
     badgeType: 'matcha',
     category: 'Tea',
   },
@@ -31,7 +33,8 @@ const PRODUCTS: Product[] = [
     originalPrice: 999,
     image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=600&q=80',
     hoverImage: 'https://images.unsplash.com/photo-1582787019808-01e4a2c5a2c9?w=600&q=80',
-    badge: 'New Drop 💧',
+    badge: 'New Drop',
+    badgeIcon: <Droplet size={14} />,
     badgeType: 'orange',
     category: 'Matcha',
   },
@@ -42,7 +45,8 @@ const PRODUCTS: Product[] = [
     price: 599,
     image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80',
     hoverImage: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600&q=80',
-    badge: 'Organic 🌿',
+    badge: 'Organic',
+    badgeIcon: <Sprout size={14} />,
     badgeType: 'matcha',
     category: 'Coffee',
   },
@@ -54,7 +58,8 @@ const PRODUCTS: Product[] = [
     originalPrice: 449,
     image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&q=80',
     hoverImage: 'https://images.unsplash.com/photo-1558227091-aebf6a01bde0?w=600&q=80',
-    badge: 'Fan Fav ❤️',
+    badge: 'Fan Fav',
+    badgeIcon: <Heart size={14} />,
     badgeType: 'orange',
     category: 'Organic',
   },
@@ -73,17 +78,18 @@ const PRODUCTS: Product[] = [
     price: 549,
     originalPrice: 699,
     image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&q=80',
-    badge: 'Limited 🔥',
+    badge: 'Limited',
+    badgeIcon: <Flame size={14} />,
     badgeType: 'orange',
     category: 'Tea',
   },
 ];
 
 const CATEGORIES = [
-  { emoji: '🍵', label: 'Teas', count: '24 variants', color: '#74B72E', bg: '#f0fbe0' },
-  { emoji: '☕', label: 'Coffees', count: '18 origins', color: '#8B5E3C', bg: '#fdf0e6' },
-  { emoji: '🌿', label: 'Organics', count: '32 products', color: '#2d7a4f', bg: '#e8f5ee' },
-  { emoji: '🎁', label: 'Gift Sets', count: '12 curated', color: '#c9913c', bg: '#fdf5e6' },
+  { icon: <Leaf size={24} />, label: 'Teas', count: '24 variants', color: '#74B72E', bg: '#f0fbe0' },
+  { icon: <Coffee size={24} />, label: 'Coffees', count: '18 origins', color: '#8B5E3C', bg: '#fdf0e6' },
+  { icon: <Sprout size={24} />, label: 'Organics', count: '32 products', color: '#2d7a4f', bg: '#e8f5ee' },
+  { icon: <Gift size={24} />, label: 'Gift Sets', count: '12 curated', color: '#c9913c', bg: '#fdf5e6' },
 ];
 
 // ─── COMPONENT ───────────────────────────────────────────────────────────────
@@ -158,14 +164,16 @@ export default function Home() {
                   alt="Matcha preparation"
                   className={styles.bentoImg}
                 />
-                <span className={`badge badge-glass ${styles.cellImgBadge}`}>🍵 Matcha</span>
+                <span className={`badge badge-glass ${styles.cellImgBadge}`}>
+                  <Leaf size={14} className="mr-1 inline-block" /> Matcha
+                </span>
               </div>
 
               {/* Cell C — Stat: Customers */}
               <div className={`${styles.bentoCell} ${styles.cellStat} ${styles.cellStatGreen}`}>
                 <span className={styles.cellStatNum}>50K+</span>
                 <span className={styles.cellStatLabel}>Happy Customers</span>
-                <span className={styles.cellStatEmoji}>😊</span>
+                <span className={styles.cellStatEmoji}><Smile size={24} /></span>
               </div>
 
               {/* Cell D — Coffee image (wide) */}
@@ -175,14 +183,16 @@ export default function Home() {
                   alt="Coffee beans"
                   className={styles.bentoImg}
                 />
-                <span className={`badge badge-glass ${styles.cellImgBadge}`}>☕ Single Origin</span>
+                <span className={`badge badge-glass ${styles.cellImgBadge}`}>
+                  <Coffee size={14} className="mr-1 inline-block" /> Single Origin
+                </span>
               </div>
 
               {/* Cell E — Stat: Rating */}
               <div className={`${styles.bentoCell} ${styles.cellStat} ${styles.cellStatCoffee}`}>
                 <span className={styles.cellStatNum}>4.9★</span>
                 <span className={styles.cellStatLabel}>Avg Rating</span>
-                <span className={styles.cellStatEmoji}>⭐</span>
+                <span className={styles.cellStatEmoji}><Star size={24} /></span>
               </div>
 
               {/* Cell F — Trust tags + organic image */}
@@ -193,9 +203,9 @@ export default function Home() {
                   className={styles.bentoImg}
                 />
                 <div className={styles.cellImgOverlay}>
-                  <p className={styles.cellTrustLine}>🚀 Free Shipping over ₹499</p>
-                  <p className={styles.cellTrustLine}>🌱 Eco-Friendly Packaging</p>
-                  <p className={styles.cellTrustLine}>🔄 Easy 7-Day Returns</p>
+                  <p className={styles.cellTrustLine}><Rocket size={16} className="inline-block mr-1 align-text-bottom" /> Free Shipping over ₹499</p>
+                  <p className={styles.cellTrustLine}><Sprout size={16} className="inline-block mr-1 align-text-bottom" /> Eco-Friendly Packaging</p>
+                  <p className={styles.cellTrustLine}><RefreshCw size={16} className="inline-block mr-1 align-text-bottom" /> Easy 7-Day Returns</p>
                 </div>
               </div>
 
@@ -203,7 +213,7 @@ export default function Home() {
               <div className={`${styles.bentoCell} ${styles.cellStat} ${styles.cellStatCream}`}>
                 <span className={styles.cellStatNum}>80+</span>
                 <span className={styles.cellStatLabel}>Products</span>
-                <span className={styles.cellStatEmoji}>📦</span>
+                <span className={styles.cellStatEmoji}><Package size={24} /></span>
               </div>
 
             </div>
@@ -222,7 +232,7 @@ export default function Home() {
                 <span className="text-label" style={{ color: 'var(--matcha-dark)' }}>Browse by category</span>
                 <h2 className={`display-md ${styles.sectionTitle}`}>Shop the Range</h2>
               </div>
-              <button className="btn btn-text hide-mobile">View All →</button>
+              <button className="btn btn-text hide-mobile">View All <ArrowRight size={16} className="inline-block ml-1 align-text-bottom" /></button>
             </div>
 
             <div ref={catRef} className={`${styles.categoriesGrid} stagger-children`}>
@@ -232,10 +242,10 @@ export default function Home() {
                   className={styles.categoryCard}
                   style={{ '--cat-bg': cat.bg, '--cat-color': cat.color } as React.CSSProperties}
                 >
-                  <span className={styles.catEmoji}>{cat.emoji}</span>
+                  <span className={styles.catEmoji}>{cat.icon}</span>
                   <h3 className={styles.catLabel}>{cat.label}</h3>
                   <p className={styles.catCount}>{cat.count}</p>
-                  <span className={styles.catArrow}>→</span>
+                  <span className={styles.catArrow}><ArrowRight size={16} /></span>
                 </div>
               ))}
             </div>
@@ -248,9 +258,9 @@ export default function Home() {
             <div className={`flex items-center justify-between ${styles.sectionHead} reveal`} ref={productsRef}>
               <div>
                 <span className="text-label" style={{ color: 'var(--matcha-dark)' }}>Freshly curated</span>
-                <h2 className={`display-md ${styles.sectionTitle}`}>Fresh Drops 🔥</h2>
+                <h2 className={`display-md ${styles.sectionTitle} flex items-center gap-2`}>Fresh Drops <Flame size={28} /></h2>
               </div>
-              <button className="btn btn-text hide-mobile">See All Products →</button>
+              <button className="btn btn-text hide-mobile">See All Products <ArrowRight size={16} className="inline-block ml-1 align-text-bottom" /></button>
             </div>
             
             {/* Category Filter Toggles */}
@@ -297,7 +307,7 @@ export default function Home() {
                   Fresh, organic, delivered to your door.
                 </p>
                 <button className="btn btn-primary">
-                  Claim Your Discount →
+                  Claim Your Discount <ArrowRight size={16} className="inline-block ml-1 align-text-bottom" />
                 </button>
               </div>
               <div className={styles.promoIllustration}>
@@ -307,7 +317,7 @@ export default function Home() {
                   className={styles.promoImg}
                 />
                 <div className={styles.promoFloatBadge}>
-                  <span>🎁</span>
+                  <span><Gift size={20} /></span>
                   <span>Gift Wrapping Available</span>
                 </div>
               </div>
@@ -320,10 +330,10 @@ export default function Home() {
           <div className="container">
             <div ref={featRef} className={`${styles.featuresGrid} stagger-children`}>
               {[
-                { icon: '🌿', title: 'Farm Direct', desc: 'Sourced straight from verified organic farms across India.' },
-                { icon: '🧪', title: 'Lab Tested', desc: 'Every batch tested for purity, potency, and no nasties.' },
-                { icon: '📦', title: 'Eco Packaging', desc: 'Compostable packaging that loves the planet as much as you do.' },
-                { icon: '💬', title: 'Community First', desc: 'Join 50K+ mindful sippers on our Renzen Tribe loyalty program.' },
+                { icon: <Sprout size={24} />, title: 'Farm Direct', desc: 'Sourced straight from verified organic farms across India.' },
+                { icon: <FlaskConical size={24} />, title: 'Lab Tested', desc: 'Every batch tested for purity, potency, and no nasties.' },
+                { icon: <Package size={24} />, title: 'Eco Packaging', desc: 'Compostable packaging that loves the planet as much as you do.' },
+                { icon: <MessageSquare size={24} />, title: 'Community First', desc: 'Join 50K+ mindful sippers on our Renzen Tribe loyalty program.' },
               ].map(f => (
                 <div key={f.title} className={styles.featureCard}>
                   <span className={styles.featureIcon}>{f.icon}</span>
@@ -339,7 +349,7 @@ export default function Home() {
         <section className={`section ${styles.newsletterSection}`}>
           <div className="container">
             <div ref={newsRef} className={`${styles.newsletter} reveal`}>
-              <span className={styles.newsletterEmoji}>🍃</span>
+              <span className={styles.newsletterEmoji}><Leaf size={32} /></span>
               <h2 className={`display-md ${styles.newsletterTitle}`}>
                 Join the Tribe
               </h2>
@@ -354,7 +364,7 @@ export default function Home() {
                   required
                 />
                 <button type="submit" className="btn btn-primary">
-                  Subscribe →
+                  Subscribe <ArrowRight size={16} className="inline-block ml-1 align-text-bottom" />
                 </button>
               </form>
               <p className={styles.newsletterNote}>✓ Get 10% off your first order as a welcome gift</p>
@@ -387,7 +397,7 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.footerBottom}>
-            <p>© 2025 Renzen. Made with 🍵 in India.</p>
+            <p>© 2025 Renzen. Made with <Leaf size={14} className="inline-block text-matcha mx-1" /> in India.</p>
             <p>Privacy Policy · Terms of Service</p>
           </div>
         </div>
