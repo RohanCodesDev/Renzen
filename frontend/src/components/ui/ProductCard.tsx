@@ -17,6 +17,7 @@ export interface Product {
   badgeIcon?: React.ReactNode;
   badgeType?: 'matcha' | 'orange' | 'cream';
   category: string;
+  subCategory?: string;
 }
 
 interface Props {

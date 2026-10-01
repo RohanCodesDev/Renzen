@@ -1,10 +1,46 @@
+import { useState } from 'react';
 import Image from 'next/image';
 import { ShoppingCart, Leaf, ArrowRight } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useToast } from '@/context/ToastContext';
 import styles from './CartDrawer.module.css';
 
 export default function CartDrawer() {
-  const { items, totalCount, totalPrice, isOpen, closeCart, removeItem, updateQty } = useCart();
+  const { items, totalCount, totalPrice, isOpen, closeCart, removeItem, updateQty, clearCart } = useCart();
+  const { showToast } = useToast();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+
+  const handleCheckout = async () => {
+    setIsCheckingOut(true);
+    try {
+      const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customerName: 'Guest Customer',
+          customerEmail: 'guest@example.com',
+          customerAddress: '123 Guest St, Guest City',
+          total: totalPrice,
+          items: items.map(item => ({
+            productName: item.product.name,
+            qty: item.quantity,
+            price: item.product.price
+          }))
+        })
+      });
+      if (res.ok) {
+        showToast('Order placed successfully! 🚀');
+        if (clearCart) clearCart();
+        closeCart();
+      } else {
+        showToast('Failed to place order.');
+      }
+    } catch (err) {
+      showToast('Error during checkout.');
+    } finally {
+      setIsCheckingOut(false);
+    }
+  };
 
   return (
     <>
@@ -103,8 +139,12 @@ export default function CartDrawer() {
               <span className={styles.subtotalPrice}>₹{totalPrice}</span>
             </div>
             <p className={styles.footerNote}>Shipping & taxes calculated at checkout</p>
-            <button className={`btn btn-primary ${styles.checkoutBtn}`}>
-              Checkout — ₹{totalPrice}
+            <button 
+              className={`btn btn-primary ${styles.checkoutBtn}`} 
+              onClick={handleCheckout}
+              disabled={isCheckingOut}
+            >
+              {isCheckingOut ? 'Processing...' : `Checkout — ₹${totalPrice}`}
             </button>
             <button className={`btn btn-ghost ${styles.continueBtn}`} onClick={closeCart}>
               Continue Shopping

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Crown, Sparkles, Flame, Leaf, Sprout, Heart, Star } from 'lucide-react';
 import ProductCard, { Product } from './ProductCard';
@@ -318,6 +318,28 @@ const TEA_CATEGORIES = [
 
 export default function TeaProducts() {
   const [expandedCats, setExpandedCats] = useState<Record<string, boolean>>({});
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch('/api/products');
+        if (res.ok) {
+          const data = await res.json();
+          setProducts(data.filter((p: Product) => p.category === 'Tea' || p.category === 'Matcha'));
+        }
+      } catch (err) {
+        console.error('Failed to fetch teas', err);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  // Map products to categories
+  const categoriesWithProducts = TEA_CATEGORIES.map(cat => ({
+    ...cat,
+    products: products.filter(p => p.subCategory === cat.title || (!p.subCategory && cat.title === 'Darjeeling First Flush'))
+  }));
 
   const toggleViewAll = (title: string) => {
     setExpandedCats(prev => ({ ...prev, [title]: !prev[title] }));
@@ -333,7 +355,7 @@ export default function TeaProducts() {
   return (
     <div className={styles.container}>
       <div className={styles.navScroll}>
-        {TEA_CATEGORIES.map(cat => (
+        {categoriesWithProducts.map(cat => (
           <button
             key={cat.title}
             onClick={() => scrollToCategory(cat.title)}
@@ -344,7 +366,7 @@ export default function TeaProducts() {
         ))}
       </div>
 
-      {TEA_CATEGORIES.map((cat, index) => {
+      {categoriesWithProducts.map((cat, index) => {
         const isExpanded = expandedCats[cat.title];
         const displayedProducts = isExpanded ? cat.products : cat.products.slice(0, 3);
 
@@ -377,7 +399,7 @@ export default function TeaProducts() {
                 )}
               </div>
             </div>
-            {index < TEA_CATEGORIES.length - 1 && (
+            {index < categoriesWithProducts.length - 1 && (
               <div className={styles.dividerWrapper}>
                 <Image src="/divider.png" alt="divider" width={1000} height={200} className={styles.dividerImage} unoptimized />
               </div>

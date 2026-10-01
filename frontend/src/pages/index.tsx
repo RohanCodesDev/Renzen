@@ -1,5 +1,5 @@
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Marquee from '@/components/ui/Marquee';
 import ProductCard, { Product } from '@/components/ui/ProductCard';
@@ -9,90 +9,12 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { useTypewriter } from '@/hooks/useTypewriter';
 import { Crown, Droplet, Sprout, Heart, Flame, Leaf, Coffee, Gift, Smile, Star, Package, RefreshCw, Rocket, FlaskConical, MessageSquare, ArrowRight } from 'lucide-react';
 
-// ─── DATA ────────────────────────────────────────────────────────────────────
-
-const PRODUCTS: Product[] = [
-  {
-    id: 1,
-    name: 'Darjeeling First Flush',
-    subtitle: 'Light & floral with muscatel notes',
-    price: 449,
-    originalPrice: 599,
-    image: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=600&q=80',
-    hoverImage: 'https://images.unsplash.com/photo-1576092762791-dd9e2220d9f4?w=600&q=80',
-    badge: 'Best Seller',
-    badgeIcon: <Crown size={14} />,
-    badgeType: 'matcha',
-    category: 'Tea',
-  },
-  {
-    id: 2,
-    name: 'Ceremonial Matcha',
-    subtitle: 'Stone-ground, vibrant shade-grown',
-    price: 749,
-    originalPrice: 999,
-    image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=600&q=80',
-    hoverImage: 'https://images.unsplash.com/photo-1582787019808-01e4a2c5a2c9?w=600&q=80',
-    badge: 'New Drop',
-    badgeIcon: <Droplet size={14} />,
-    badgeType: 'orange',
-    category: 'Matcha',
-  },
-  {
-    id: 3,
-    name: 'Ethiopian Yirgacheffe',
-    subtitle: 'Bright, blueberry & citrus finish',
-    price: 599,
-    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80',
-    hoverImage: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=600&q=80',
-    badge: 'Organic',
-    badgeIcon: <Sprout size={14} />,
-    badgeType: 'matcha',
-    category: 'Coffee',
-  },
-  {
-    id: 4,
-    name: 'Wild Forest Honey',
-    subtitle: 'Raw, unfiltered from the Nilgiris',
-    price: 349,
-    originalPrice: 449,
-    image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&q=80',
-    hoverImage: 'https://images.unsplash.com/photo-1558227091-aebf6a01bde0?w=600&q=80',
-    badge: 'Fan Fav',
-    badgeIcon: <Heart size={14} />,
-    badgeType: 'orange',
-    category: 'Organic',
-  },
-  {
-    id: 5,
-    name: 'Cold Brew Concentrate',
-    subtitle: 'Smooth, less acidic. No bitterness.',
-    price: 449,
-    image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80',
-    category: 'Coffee',
-  },
-  {
-    id: 6,
-    name: 'Kashmiri Kahwa Blend',
-    subtitle: 'Saffron, cardamom & rose petals',
-    price: 549,
-    originalPrice: 699,
-    image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&q=80',
-    badge: 'Limited',
-    badgeIcon: <Flame size={14} />,
-    badgeType: 'orange',
-    category: 'Tea',
-  },
-];
-
 const CATEGORIES = [
   { icon: <Leaf size={24} />, label: 'Teas', count: '24 variants', color: '#74B72E', bg: '#f0fbe0' },
   { icon: <Coffee size={24} />, label: 'Coffees', count: '18 origins', color: '#8B5E3C', bg: '#fdf0e6' },
   { icon: <Sprout size={24} />, label: 'Organics', count: '32 products', color: '#2d7a4f', bg: '#e8f5ee' },
   { icon: <Gift size={24} />, label: 'Gift Sets', count: '12 curated', color: '#c9913c', bg: '#fdf5e6' },
 ];
-
-// ─── COMPONENT ───────────────────────────────────────────────────────────────
 
 export default function Home() {
   const catRef      = useScrollReveal();
@@ -103,11 +25,27 @@ export default function Home() {
   const { revealed, activeLine } = useTypewriter();
   
   const [activeCategory, setActiveCategory] = useState('All');
+  const [products, setProducts] = useState<Product[]>([]);
   const FILTER_CATEGORIES = ['All', 'Tea', 'Coffee', 'Organic', 'Matcha'];
   
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch('/api/products');
+        if (res.ok) {
+          const data = await res.json();
+          setProducts(data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch products', err);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   const filteredProducts = activeCategory === 'All' 
-    ? PRODUCTS 
-    : PRODUCTS.filter(p => p.category === activeCategory);
+    ? products 
+    : products.filter(p => p.category === activeCategory);
 
   return (
     <>

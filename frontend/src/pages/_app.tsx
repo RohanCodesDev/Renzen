@@ -4,16 +4,21 @@ import { ToastProvider } from '@/context/ToastContext';
 import { CartProvider } from '@/context/CartContext';
 import ToastContainer from '@/components/ui/Toast';
 import CartDrawer from '@/components/ui/CartDrawer';
+import ContactWidget from '@/components/ui/ContactWidget';
+import { MessagesProvider } from '@/context/MessagesContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ToastProvider>
-      <CartProvider>
-        <Component {...pageProps} />
-        {/* Global UI overlays */}
-        <ToastContainer />
-        <CartDrawer />
-      </CartProvider>
-    </ToastProvider>
+    <MessagesProvider>
+      <ToastProvider>
+        <CartProvider>
+          <Component {...pageProps} />
+          {/* Global UI overlays */}
+          <ToastContainer />
+          <CartDrawer />
+          <ContactWidget />
+        </CartProvider>
+      </ToastProvider>
+    </MessagesProvider>
   );
 }

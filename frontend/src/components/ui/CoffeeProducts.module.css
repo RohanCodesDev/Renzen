@@ -1,4 +1,4 @@
-﻿.container {
+.container {
   display: flex;
   flex-direction: column;
 }
@@ -20,29 +20,52 @@
   margin-top: -2rem;
   margin-bottom: 2rem;
   scrollbar-width: none;
-  background: var(--cream);
 }
 .navScroll::-webkit-scrollbar { display: none; }
 
 .navPill {
   white-space: nowrap;
-  padding: 0.5rem 1.25rem;
+  flex-shrink: 0;
+  padding: 0.65rem 1.5rem;
   border-radius: 99px;
-  background: white;
-  border: 1px solid rgba(90, 50, 20, 0.18);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(111, 78, 55, 0.25);
+  box-shadow: 0 4px 15px rgba(111, 78, 55, 0.05), inset 0 2px 5px rgba(255, 255, 255, 0.8);
   font-family: var(--font-display);
   font-size: 0.85rem;
-  font-weight: 600;
-  color: #5a3214;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--brown-dark);
   cursor: pointer;
-  transition: all var(--t-fast);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
 }
+
+.navPill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  border-radius: inherit;
+}
+
 .navPill:hover {
-  background: #3b1f0a;
-  color: white;
-  border-color: #3b1f0a;
-  transform: translateY(-2px);
+  color: var(--white);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(111, 78, 55, 0.35);
+  border-color: transparent;
+}
+
+.navPill:hover::before {
+  opacity: 1;
 }
 
 /* ── Category header ── */
