@@ -1,8 +1,15 @@
 import AdminLayout from '@/components/layout/AdminLayout';
 import { Save } from 'lucide-react';
 import styles from '@/styles/Admin.module.css';
+import { useToast } from '@/context/ToastContext';
 
 export default function AdminSettings() {
+  const { showToast } = useToast();
+
+  const handleSave = () => {
+    showToast('Settings saved successfully!');
+  };
+
   return (
     <AdminLayout title="Settings">
       <div className={styles.pageHeader}>
@@ -11,7 +18,7 @@ export default function AdminSettings() {
           <p className={styles.pageSub}>Manage your store preferences and configurations.</p>
         </div>
         <div className={styles.headerActions}>
-          <button className={`${styles.btnAdmin} ${styles.btnPrimary}`}>
+          <button className={`${styles.btnAdmin} ${styles.btnPrimary}`} onClick={handleSave}>
             <Save size={16} /> Save Changes
           </button>
         </div>

@@ -6,19 +6,22 @@ import ToastContainer from '@/components/ui/Toast';
 import CartDrawer from '@/components/ui/CartDrawer';
 import ContactWidget from '@/components/ui/ContactWidget';
 import { MessagesProvider } from '@/context/MessagesContext';
+import { SessionProvider } from 'next-auth/react';
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <MessagesProvider>
-      <ToastProvider>
-        <CartProvider>
-          <Component {...pageProps} />
-          {/* Global UI overlays */}
-          <ToastContainer />
-          <CartDrawer />
-          <ContactWidget />
-        </CartProvider>
-      </ToastProvider>
-    </MessagesProvider>
+    <SessionProvider session={session}>
+      <MessagesProvider>
+        <ToastProvider>
+          <CartProvider>
+            <Component {...pageProps} />
+            {/* Global UI overlays */}
+            <ToastContainer />
+            <CartDrawer />
+            <ContactWidget />
+          </CartProvider>
+        </ToastProvider>
+      </MessagesProvider>
+    </SessionProvider>
   );
 }

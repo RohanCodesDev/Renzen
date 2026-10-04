@@ -9,17 +9,25 @@ export default function CartDrawer() {
   const { items, totalCount, totalPrice, isOpen, closeCart, removeItem, updateQty, clearCart } = useCart();
   const { showToast } = useToast();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [customerInfo, setCustomerInfo] = useState({ name: '', email: '', address: '' });
 
-  const handleCheckout = async () => {
+  const handleCheckout = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!showCheckoutForm) {
+      setShowCheckoutForm(true);
+      return;
+    }
+
     setIsCheckingOut(true);
     try {
       const res = await fetch('/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          customerName: 'Guest Customer',
-          customerEmail: 'guest@example.com',
-          customerAddress: '123 Guest St, Guest City',
+          customerName: customerInfo.name,
+          customerEmail: customerInfo.email,
+          customerAddress: customerInfo.address,
           total: totalPrice,
           items: items.map(item => ({
             productName: item.product.name,
@@ -31,6 +39,8 @@ export default function CartDrawer() {
       if (res.ok) {
         showToast('Order placed successfully! 🚀');
         if (clearCart) clearCart();
+        setShowCheckoutForm(false);
+        setCustomerInfo({ name: '', email: '', address: '' });
         closeCart();
       } else {
         showToast('Failed to place order.');
@@ -138,17 +148,37 @@ export default function CartDrawer() {
               <span>Subtotal</span>
               <span className={styles.subtotalPrice}>₹{totalPrice}</span>
             </div>
-            <p className={styles.footerNote}>Shipping & taxes calculated at checkout</p>
-            <button 
-              className={`btn btn-primary ${styles.checkoutBtn}`} 
-              onClick={handleCheckout}
-              disabled={isCheckingOut}
-            >
-              {isCheckingOut ? 'Processing...' : `Checkout — ₹${totalPrice}`}
-            </button>
-            <button className={`btn btn-ghost ${styles.continueBtn}`} onClick={closeCart}>
-              Continue Shopping
-            </button>
+            {!showCheckoutForm ? (
+              <>
+                <p className={styles.footerNote}>Shipping & taxes calculated at checkout</p>
+                <button 
+                  className={`btn btn-primary ${styles.checkoutBtn}`} 
+                  onClick={() => handleCheckout()}
+                >
+                  Checkout — ₹{totalPrice}
+                </button>
+                <button className={`btn btn-ghost ${styles.continueBtn}`} onClick={closeCart}>
+                  Continue Shopping
+                </button>
+              </>
+            ) : (
+              <form onSubmit={handleCheckout} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1rem' }}>
+                <input required type="text" placeholder="Full Name" className={styles.inputField} style={{ padding: '0.75rem', borderRadius: '4px', border: '1px solid var(--border)', fontSize: '0.9rem' }} value={customerInfo.name} onChange={e => setCustomerInfo({...customerInfo, name: e.target.value})} />
+                <input required type="email" placeholder="Email Address" className={styles.inputField} style={{ padding: '0.75rem', borderRadius: '4px', border: '1px solid var(--border)', fontSize: '0.9rem' }} value={customerInfo.email} onChange={e => setCustomerInfo({...customerInfo, email: e.target.value})} />
+                <textarea required placeholder="Shipping Address" rows={2} className={styles.inputField} style={{ padding: '0.75rem', borderRadius: '4px', border: '1px solid var(--border)', fontSize: '0.9rem', resize: 'none' }} value={customerInfo.address} onChange={e => setCustomerInfo({...customerInfo, address: e.target.value})} />
+                <button 
+                  type="submit"
+                  className={`btn btn-primary ${styles.checkoutBtn}`} 
+                  disabled={isCheckingOut}
+                  style={{ marginTop: '0.5rem' }}
+                >
+                  {isCheckingOut ? 'Processing...' : `Confirm & Pay ₹${totalPrice}`}
+                </button>
+                <button type="button" className={`btn btn-ghost ${styles.continueBtn}`} onClick={() => setShowCheckoutForm(false)}>
+                  Back to Cart
+                </button>
+              </form>
+            )}
           </div>
         )}
       </aside>

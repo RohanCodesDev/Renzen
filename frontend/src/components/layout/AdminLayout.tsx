@@ -1,7 +1,8 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useSession, signOut } from 'next-auth/react';
 import { 
   LayoutDashboard, 
   Package, 
@@ -20,10 +21,25 @@ import { useMessages } from '@/context/MessagesContext';
 
 export default function AdminLayout({ children, title = "Admin Dashboard" }: { children: React.ReactNode, title?: string }) {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMessagesOpen, setIsMessagesOpen] = useState(false);
   const { queries, unreadCount, markAsRead } = useMessages();
   
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/admin/login');
+    }
+  }, [status, router]);
+
+  if (status === 'loading' || status === 'unauthenticated') {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: 'var(--bg-cream)' }}>
+        <p style={{ color: 'var(--brown-dark)' }}>Loading...</p>
+      </div>
+    );
+  }
+
   const navItems = [
     { id: '/admin', icon: <LayoutDashboard size={18} />, label: 'Dashboard' },
     { id: '/adminProducts', icon: <Package size={18} />, label: 'Products' },
@@ -64,7 +80,7 @@ export default function AdminLayout({ children, title = "Admin Dashboard" }: { c
               </Link>
             ))}
 
-            <button className={`${styles.navItem} ${styles.logoutBtn}`}>
+            <button className={`${styles.navItem} ${styles.logoutBtn}`} onClick={() => signOut({ callbackUrl: '/admin/login' })}>
               <LogOut size={18} />
               <span>Log Out</span>
             </button>
@@ -83,7 +99,16 @@ export default function AdminLayout({ children, title = "Admin Dashboard" }: { c
               
               <div className={styles.searchBar}>
                 <Search size={16} color="var(--brown-mid)" />
-                <input type="text" placeholder="Search orders, products, or customers..." className={styles.searchInput} />
+                <input 
+                  type="text" 
+                  placeholder="Search orders, products, or customers..." 
+                  className={styles.searchInput} 
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      alert('Global search is coming soon!');
+                    }
+                  }}
+                />
               </div>
             </div>
 
@@ -134,7 +159,7 @@ export default function AdminLayout({ children, title = "Admin Dashboard" }: { c
                 )}
               </div>
 
-              <button className={styles.iconBtn}>
+              <button className={styles.iconBtn} onClick={() => alert('No new system notifications.')}>
                 <Bell size={18} />
               </button>
               <img 

@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/layout/AdminLayout';
 import { ArrowUpRight, ArrowDownRight, MoreHorizontal, Calendar, Download, Filter } from 'lucide-react';
 import styles from '@/styles/Admin.module.css';
+import { useToast } from '@/context/ToastContext';
 
 export default function AdminDashboard() {
+  const { showToast } = useToast();
   const [orders, setOrders] = useState<any[]>([]);
 
   useEffect(() => {
@@ -37,10 +39,10 @@ export default function AdminDashboard() {
           <p className={styles.pageSub}>Here's what's happening with your store today.</p>
         </div>
         <div className={styles.headerActions}>
-          <button className={styles.btnAdmin}>
+          <button className={styles.btnAdmin} onClick={() => showToast('Date filtering coming soon')}>
             <Calendar size={16} /> Last 30 Days
           </button>
-          <button className={`${styles.btnAdmin} ${styles.btnPrimary}`}>
+          <button className={`${styles.btnAdmin} ${styles.btnPrimary}`} onClick={() => showToast('Exporting data to CSV...')}>
             <Download size={16} /> Export
           </button>
         </div>
@@ -71,7 +73,7 @@ export default function AdminDashboard() {
         <div className={styles.sectionBlockHeader}>
           <h2 className={styles.sectionBlockTitle}>Recent Orders</h2>
           <div className={styles.headerActions}>
-            <button className={styles.btnAdmin}>
+            <button className={styles.btnAdmin} onClick={() => showToast('Advanced filtering coming soon')}>
               <Filter size={16} /> Filter
             </button>
           </div>
@@ -114,7 +116,7 @@ export default function AdminDashboard() {
                     </span>
                   </td>
                   <td style={{ textAlign: 'right' }}>
-                    <button className={styles.iconBtn}><MoreHorizontal size={16} /></button>
+                    <button className={styles.iconBtn} onClick={() => showToast('More order options coming soon')}><MoreHorizontal size={16} /></button>
                   </td>
                 </tr>
               ))}

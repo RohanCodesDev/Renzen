@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/layout/AdminLayout';
 import { Mail, MoreHorizontal, Filter } from 'lucide-react';
 import styles from '@/styles/Admin.module.css';
+import { useToast } from '@/context/ToastContext';
 
 export default function AdminCustomers() {
+  const { showToast } = useToast();
   const [customers, setCustomers] = useState<any[]>([]);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export default function AdminCustomers() {
         <div className={styles.sectionBlockHeader}>
           <h2 className={styles.sectionBlockTitle}>Customer List</h2>
           <div className={styles.headerActions}>
-            <button className={styles.btnAdmin}>
+            <button className={styles.btnAdmin} onClick={() => showToast('Advanced filtering coming soon!')}>
               <Filter size={16} /> Filter
             </button>
           </div>
@@ -59,13 +61,13 @@ export default function AdminCustomers() {
                   <td style={{ fontWeight: 500 }}>{customer.id.substring(0, 8)}</td>
                   <td style={{ fontWeight: 600 }}>{customer.name}</td>
                   <td>{customer.email}</td>
-                  <td>{customer.orders}</td>
-                  <td style={{ fontWeight: 500 }}>₹{customer.spent}</td>
-                  <td>{new Date(customer.joined).toLocaleDateString()}</td>
+                  <td>{customer.ordersCount}</td>
+                  <td style={{ fontWeight: 500 }}>₹{customer.totalSpent}</td>
+                  <td>{new Date(customer.joinedAt).toLocaleDateString()}</td>
                   <td>
                     <div className={styles.headerActions} style={{ gap: '0.25rem' }}>
-                      <button className={styles.iconBtn} title="Email Customer"><Mail size={16} /></button>
-                      <button className={styles.iconBtn} title="More Options"><MoreHorizontal size={16} /></button>
+                      <button className={styles.iconBtn} title="Email Customer" onClick={() => window.location.href = `mailto:${customer.email}`}><Mail size={16} /></button>
+                      <button className={styles.iconBtn} title="More Options" onClick={() => showToast('More customer options coming soon')}><MoreHorizontal size={16} /></button>
                     </div>
                   </td>
                 </tr>

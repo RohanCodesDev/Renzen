@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
+import { sendAdminNotificationEmail } from '@/lib/email';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
@@ -23,6 +24,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           message: data.message,
         }
       });
+
+      sendAdminNotificationEmail('New Customer Message', `You received a new message from ${data.name} (${data.email}):\n\n${data.message}`);
+
       return res.status(201).json(message);
     } catch (error) {
       return res.status(500).json({ error: 'Failed to create message' });

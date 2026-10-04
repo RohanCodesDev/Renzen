@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
+import { sendOrderConfirmationEmail, sendAdminNotificationEmail } from '@/lib/email';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
@@ -57,6 +58,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           totalSpent: { increment: Number(total) }
         }
       });
+
+      // Send emails (fire and forget)
+      sendOrderConfirmationEmail(customer.email, order.id, Number(total));
+      sendAdminNotificationEmail('New Order Placed', `A new order (${order.id}) was placed by ${customer.name} for ₹${total}.`);
 
       return res.status(201).json(order);
     } catch (error) {

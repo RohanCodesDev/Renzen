@@ -53,7 +53,7 @@ export default function AdminOrders() {
         <div className={styles.sectionBlockHeader}>
           <h2 className={styles.sectionBlockTitle}>Recent Orders</h2>
           <div className={styles.headerActions}>
-            <button className={styles.btnAdmin}>
+            <button className={styles.btnAdmin} onClick={() => showToast('Order filtering coming soon!')}>
               <Filter size={16} /> Filter
             </button>
           </div>
@@ -80,8 +80,8 @@ export default function AdminOrders() {
                   <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                   <td style={{ fontWeight: 600 }}>₹{order.total}</td>
                   <td>
-                    <span className={`${styles.statusBadge} ${order.payment === 'Paid' ? styles.statusCompleted : styles.statusPending}`}>
-                      {order.payment}
+                    <span className={`${styles.statusBadge} ${order.paymentStatus === 'Paid' ? styles.statusCompleted : styles.statusPending}`}>
+                      {order.paymentStatus}
                     </span>
                   </td>
                   <td>
