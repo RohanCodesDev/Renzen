@@ -13,6 +13,7 @@ export default function AdminProducts() {
   const [isLoading, setIsLoading] = useState(true);
   const { showToast } = useToast();
   const [isAddingNewSubCat, setIsAddingNewSubCat] = useState(false);
+  const [isCategoryLocked, setIsCategoryLocked] = useState(false);
   const [formData, setFormData] = useState<Partial<Product>>({
     name: '', subtitle: '', price: 0, image: '', category: 'Coffee', subCategory: ''
   });
@@ -34,10 +35,11 @@ export default function AdminProducts() {
     fetchProducts();
   }, []);
 
-  const openAddModal = () => {
+  const openAddModal = (initialCategory?: string) => {
     setEditingId(null);
-    setFormData({ name: '', subtitle: '', price: 0, image: '', category: 'Coffee', subCategory: '' });
+    setFormData({ name: '', subtitle: '', price: 0, image: '', category: initialCategory || 'Coffee', subCategory: '' });
     setIsAddingNewSubCat(false);
+    setIsCategoryLocked(!!initialCategory);
     setIsModalOpen(true);
   };
 
@@ -52,10 +54,12 @@ export default function AdminProducts() {
       subCategory: product.subCategory
     });
     setIsAddingNewSubCat(false);
+    setIsCategoryLocked(false);
     setIsModalOpen(true);
   };
 
   const handleRemove = async (id: number) => {
+    if (!window.confirm('Are you sure you want to delete this product?')) return;
     try {
       const res = await fetch(`/api/products/${id}`, { method: 'DELETE' });
       if (res.ok) {
@@ -140,7 +144,7 @@ export default function AdminProducts() {
           <p className={styles.pageSub}>Manage your inventory organized by categories and sub-categories.</p>
         </div>
         <div className={styles.headerActions}>
-          <button className={`${styles.btnAdmin} ${styles.btnPrimary}`} onClick={openAddModal}>
+          <button className={`${styles.btnAdmin} ${styles.btnPrimary}`} onClick={() => openAddModal()}>
             <Plus size={16} /> Add Product
           </button>
         </div>
@@ -150,9 +154,14 @@ export default function AdminProducts() {
         {Object.entries(groupedProducts).map(([category, subCategories]) => (
           <div key={category} className={styles.sectionBlock} style={{ padding: '2.5rem' }}>
             
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 800, color: 'var(--brown-dark)', marginBottom: '2rem', borderBottom: '2px solid var(--brown-dark)', paddingBottom: '0.75rem' }}>
-              {category}
-            </h2>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', borderBottom: '2px solid var(--brown-dark)', paddingBottom: '0.75rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.75rem', fontWeight: 800, color: 'var(--brown-dark)' }}>
+                {category}
+              </h2>
+              <button className={styles.btnAdmin} onClick={() => openAddModal(category)}>
+                <Plus size={16} /> Add to {category}
+              </button>
+            </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
               {Object.entries(subCategories).map(([subCat, items]) => (
@@ -258,20 +267,26 @@ export default function AdminProducts() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--brown-dark)' }}>Primary Category</label>
-                  <select 
-                    className={styles.searchBar} 
-                    style={{ width: '100%' }} 
-                    value={formData.category} 
-                    onChange={e => {
-                      setFormData({...formData, category: e.target.value, subCategory: ''});
-                      setIsAddingNewSubCat(false);
-                    }}
-                  >
-                    <option value="Coffee">Coffee</option>
-                    <option value="Tea">Tea</option>
-                    <option value="Matcha">Matcha</option>
-                    <option value="Organic">Organic</option>
-                  </select>
+                  {isCategoryLocked ? (
+                    <div className={styles.searchBar} style={{ width: '100%', background: 'var(--bg-cream)', color: 'var(--brown-mid)' }}>
+                      {formData.category}
+                    </div>
+                  ) : (
+                    <select 
+                      className={styles.searchBar} 
+                      style={{ width: '100%' }} 
+                      value={formData.category} 
+                      onChange={e => {
+                        setFormData({...formData, category: e.target.value, subCategory: ''});
+                        setIsAddingNewSubCat(false);
+                      }}
+                    >
+                      <option value="Coffee">Coffee</option>
+                      <option value="Tea">Tea</option>
+                      <option value="Matcha">Matcha</option>
+                      <option value="Organic">Organic</option>
+                    </select>
+                  )}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--brown-dark)' }}>Sub-Category</label>
