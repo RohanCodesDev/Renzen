@@ -8,9 +8,9 @@
   /* Line 3: "Paramanna" (Bold) */
 
   /* ── 2. VERTICAL SPACING / GAP CONTROLS ── */
-  --gap-house-to-paramanna: -0.8rem;
+  --gap-house-to-paramanna: -2rem;
   /* Spacing between "The House Of" and "Paramanna" */
-  --gap-welcome-to-house: 0.3rem;
+  --gap-welcome-to-house: 0.1rem;
   /* Spacing between "Welcome to" and "The House Of" */
 
   /* ── 3. TEXT SPACING / LETTER SPACING CONTROLS ── */
@@ -18,6 +18,16 @@
   /* Text spacing / letter spacing of "Paramanna" */
   --letter-spacing-house-of: -0.025em;
   /* Text spacing / letter spacing of "The House Of" */
+
+  /* ── 4. MANDALA CONTROLS (Bottom half-appeared) ── */
+  --mandala-size: 650px;
+  /* Width & height (diameter) of the mandala */
+  --mandala-submerged: 50%;
+  /* 50% submerged below bottom = exactly half appears */
+  --mandala-opacity: 0.27;
+  /* Opacity of the mandala */
+  --mandala-spin-speed: 50s;
+  /* Spin animation duration (e.g. 25s = brisk, 50s = serene, 90s = subtle) */
 
   min-height: 100vh;
   min-height: 100dvh;
@@ -38,7 +48,7 @@
 
 .centerContent {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -150,11 +160,62 @@
   }
 }
 
+/* ── 4. Sacred Mandala (Bottom Half-Appeared) ── */
+.mandalaWrapper {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, var(--mandala-submerged));
+  width: var(--mandala-size);
+  height: var(--mandala-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+  user-select: none;
+  animation: mandalaFadeIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.mandalaImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: var(--mandala-opacity);
+  mix-blend-mode: multiply;
+  display: block;
+  transform-origin: center center;
+  animation: mandalaSpin var(--mandala-spin-speed) linear infinite;
+}
+
+@keyframes mandalaSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes mandalaFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(var(--mandala-submerged) + 30px));
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, var(--mandala-submerged));
+  }
+}
+
 @media (max-width: 768px) {
   .landingContainer {
     --size-welcome: 1.35rem;
     --size-house-of: 2.5rem;
     --size-paramanna: 3.5rem;
+    --mandala-size: 380px;
     padding-top: 16vh;
     padding-left: 1.5rem;
     padding-right: 1.5rem;

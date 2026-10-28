@@ -109,6 +109,15 @@ export default function LandingPage() {
             </div>
           </h1>
         </div>
+
+        {/* Half-appeared Sacred Mandala at bottom */}
+        <div className={styles.mandalaWrapper} aria-hidden="true">
+          <img
+            src="/mandalasvg.svg"
+            alt=""
+            className={styles.mandalaImage}
+          />
+        </div>
       </main>
     </>
   );
