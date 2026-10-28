@@ -1,0 +1,162 @@
+.landingContainer {
+  /* ── 1. FONT SIZE CONTROLS (Single values — edit directly here) ── */
+  --size-welcome: 2rem;
+  /* Line 1: "Welcome to" */
+  --size-house-of: 5.2rem;
+  /* Line 2: "The House Of" (Bold) */
+  --size-paramanna: 9.8rem;
+  /* Line 3: "Paramanna" (Bold) */
+
+  /* ── 2. VERTICAL SPACING / GAP CONTROLS ── */
+  --gap-house-to-paramanna: -0.6rem;
+  /* Spacing between "The House Of" and "Paramanna" */
+  --gap-welcome-to-house: 0.3rem;
+  /* Spacing between "Welcome to" and "The House Of" */
+
+  /* ── 3. TEXT SPACING / LETTER SPACING CONTROLS ── */
+  --letter-spacing-paramanna: -0.03em;
+  /* Text spacing / letter spacing of "Paramanna" */
+  --letter-spacing-house-of: -0.025em;
+  /* Text spacing / letter spacing of "The House Of" */
+
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100vw;
+  background-color: #FAF8F5;
+  /* Complete off-white */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.6rem;
+  padding-top: 14vh;
+  /* Pull contents up */
+  overflow: hidden;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.centerContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── 1. "Welcome to" Styling ── */
+.welcomeText {
+  font-family: var(--font-italic, 'Playfair Display', Georgia, serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--size-welcome);
+  color: #6E5F52;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--gap-welcome-to-house);
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.35em;
+}
+
+.mainTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+}
+
+/* ── 2. "The House Of" Styling (Medium) ── */
+.titleLineMedium {
+  font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: var(--size-house-of);
+  font-weight: 800;
+  color: #1A130F;
+  letter-spacing: var(--letter-spacing-house-of);
+  line-height: 1.08;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.15em;
+  white-space: nowrap;
+}
+
+/* ── 3. "Paramanna" Styling (Larger) ── */
+.titleLineLarge {
+  font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: var(--size-paramanna);
+  font-weight: 800;
+  color: #1A130F;
+  letter-spacing: var(--letter-spacing-paramanna);
+  line-height: 1.04;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.12em;
+  white-space: nowrap;
+  margin-top: var(--gap-house-to-paramanna);
+}
+
+/* ── Cursors ── */
+.cursorSmall {
+  display: inline-block;
+  width: 2px;
+  height: 0.85em;
+  background-color: #6E5F52;
+  margin-left: 6px;
+  vertical-align: middle;
+  border-radius: 1px;
+  animation: blink 0.85s infinite;
+}
+
+.cursorMedium {
+  display: inline-block;
+  width: clamp(3px, 0.5vw, 5px);
+  height: 0.82em;
+  background-color: #1A130F;
+  margin-left: clamp(4px, 0.8vw, 10px);
+  vertical-align: middle;
+  border-radius: 2px;
+  animation: blink 0.85s infinite;
+}
+
+.cursorLarge {
+  display: inline-block;
+  width: clamp(3.5px, 0.55vw, 6px);
+  height: 0.82em;
+  background-color: #1A130F;
+  margin-left: clamp(5px, 0.8vw, 12px);
+  vertical-align: middle;
+  border-radius: 2px;
+  animation: blink 0.85s infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .landingContainer {
+    --size-welcome: 1.35rem;
+    --size-house-of: 2.5rem;
+    --size-paramanna: 3.5rem;
+    padding-top: 16vh;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}

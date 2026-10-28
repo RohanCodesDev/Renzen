@@ -5,20 +5,8 @@ import styles from './ProductCard.module.css';
 import { useCart } from '@/context/CartContext';
 import { useToast } from '@/context/ToastContext';
 
-export interface Product {
-  id: number;
-  name: string;
-  subtitle: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  hoverImage?: string;
-  badge?: string;
-  badgeIcon?: React.ReactNode;
-  badgeType?: 'matcha' | 'orange' | 'cream';
-  category: string;
-  subCategory?: string;
-}
+import { Product } from '@/data';
+export type { Product };
 
 interface Props {
   product: Product;

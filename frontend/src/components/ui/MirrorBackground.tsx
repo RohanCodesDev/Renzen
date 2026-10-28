@@ -5,19 +5,24 @@ interface Props {
   tileSize?: number;
   opacity?: number;
   mixBlendMode?: React.CSSProperties['mixBlendMode'];
+  mode?: 'horizontal' | 'both';
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 /**
  * Renders a mirrored-repeat tiled background using canvas.
- * Horizontally adjacent tiles are flipped on the X axis.
- * Vertically adjacent tiles are flipped on the Y axis.
- * This makes any non-seamless texture tile without visible seams.
+ * - 'horizontal': Tiles alternate horizontally: [ Original | Flipped Horizontally | Original | ... ]
+ * - 'both': 2x2 mirror flipping on both X and Y axes for seamless pattern matching.
  */
 export default function MirrorBackground({
   src,
-  tileSize = 250,
-  opacity = 0.15,
-  mixBlendMode = 'overlay',
+  tileSize = 300,
+  opacity = 0.18,
+  mixBlendMode = 'multiply',
+  mode = 'horizontal',
+  className,
+  style,
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -45,53 +50,84 @@ export default function MirrorBackground({
       const tw = tileSize;
       const th = img.width > 0 ? tileSize * (img.height / img.width) : tileSize;
 
-      // Build a 2x2 mirror super-tile on an offscreen canvas:
-      //  [ normal   | flip-X  ]
-      //  [ flip-Y   | flip-XY ]
-      const off = document.createElement('canvas');
-      off.width = tw * 2;
-      off.height = th * 2;
-      const oc = off.getContext('2d')!;
+      if (mode === 'horizontal') {
+        // Alternating horizontal tiles: [ Original | Flipped Horizontally ]
+        const off = document.createElement('canvas');
+        off.width = tw * 2;
+        off.height = th;
+        const oc = off.getContext('2d');
+        if (!oc) return;
 
-      // Top-left: normal
-      oc.drawImage(img, 0, 0, tw, th);
+        // Tile 1: Original
+        oc.drawImage(img, 0, 0, tw, th);
 
-      // Top-right: flip horizontal
-      oc.save();
-      oc.translate(tw * 2, 0);
-      oc.scale(-1, 1);
-      oc.drawImage(img, 0, 0, tw, th);
-      oc.restore();
+        // Tile 2 (beside): Flipped horizontally
+        oc.save();
+        oc.translate(tw * 2, 0);
+        oc.scale(-1, 1);
+        oc.drawImage(img, 0, 0, tw, th);
+        oc.restore();
 
-      // Bottom-left: flip vertical
-      oc.save();
-      oc.translate(0, th * 2);
-      oc.scale(1, -1);
-      oc.drawImage(img, 0, 0, tw, th);
-      oc.restore();
+        const pattern = ctx.createPattern(off, 'repeat');
+        if (pattern) {
+          ctx.clearRect(0, 0, w, h);
+          ctx.globalAlpha = opacity;
+          ctx.fillStyle = pattern;
+          ctx.fillRect(0, 0, w, h);
+        }
+      } else {
+        // 2x2 mirror super-tile (both X and Y)
+        const off = document.createElement('canvas');
+        off.width = tw * 2;
+        off.height = th * 2;
+        const oc = off.getContext('2d');
+        if (!oc) return;
 
-      // Bottom-right: flip both axes
-      oc.save();
-      oc.translate(tw * 2, th * 2);
-      oc.scale(-1, -1);
-      oc.drawImage(img, 0, 0, tw, th);
-      oc.restore();
+        // Top-left: original
+        oc.drawImage(img, 0, 0, tw, th);
 
-      // Tile the super-tile across the canvas
-      const pattern = ctx.createPattern(off, 'repeat');
-      if (pattern) {
-        ctx.globalAlpha = opacity;
-        ctx.fillStyle = pattern;
-        ctx.fillRect(0, 0, w, h);
+        // Top-right: flip horizontal
+        oc.save();
+        oc.translate(tw * 2, 0);
+        oc.scale(-1, 1);
+        oc.drawImage(img, 0, 0, tw, th);
+        oc.restore();
+
+        // Bottom-left: flip vertical
+        oc.save();
+        oc.translate(0, th * 2);
+        oc.scale(1, -1);
+        oc.drawImage(img, 0, 0, tw, th);
+        oc.restore();
+
+        // Bottom-right: flip both axes
+        oc.save();
+        oc.translate(tw * 2, th * 2);
+        oc.scale(-1, -1);
+        oc.drawImage(img, 0, 0, tw, th);
+        oc.restore();
+
+        const pattern = ctx.createPattern(off, 'repeat');
+        if (pattern) {
+          ctx.clearRect(0, 0, w, h);
+          ctx.globalAlpha = opacity;
+          ctx.fillStyle = pattern;
+          ctx.fillRect(0, 0, w, h);
+        }
       }
     };
 
-    img.onload = draw;
+    if (img.complete) {
+      draw();
+    } else {
+      img.onload = draw;
+    }
 
     const ro = new ResizeObserver(() => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(draw);
     });
+
     const parent = canvas.parentElement;
     if (parent) ro.observe(parent);
 
@@ -99,11 +135,12 @@ export default function MirrorBackground({
       ro.disconnect();
       cancelAnimationFrame(rafId);
     };
-  }, [src, tileSize, opacity]);
+  }, [src, tileSize, opacity, mixBlendMode, mode]);
 
   return (
     <canvas
       ref={canvasRef}
+      className={className}
       style={{
         position: 'absolute',
         inset: 0,
@@ -112,6 +149,7 @@ export default function MirrorBackground({
         pointerEvents: 'none',
         mixBlendMode,
         zIndex: 0,
+        ...style,
       }}
     />
   );

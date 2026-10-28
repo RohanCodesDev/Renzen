@@ -49,8 +49,8 @@ export default function ContactWidget() {
     }, 3000);
   };
 
-  // Hide completely on admin routes
-  if (router.pathname.startsWith('/admin')) {
+  // Hide completely on landing page and admin routes
+  if (router.pathname === '/' || router.pathname.startsWith('/admin')) {
     return null;
   }
 

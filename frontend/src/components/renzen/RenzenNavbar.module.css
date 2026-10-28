@@ -1,0 +1,152 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: rgba(255, 253, 208, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(44, 30, 22, 0.08);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.scrolled {
+  box-shadow: 0 4px 20px rgba(44, 30, 22, 0.08);
+  background: rgba(255, 253, 208, 0.98);
+}
+
+.inner {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  color: var(--brown-dark, #2C1E16);
+}
+
+.leafIcon {
+  display: flex;
+  align-items: center;
+}
+
+.logoText {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.logoBadge {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  background: rgba(116, 183, 46, 0.15);
+  color: #3f6815;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLink {
+  font-family: var(--font-display, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--brown-dark, #2C1E16);
+  position: relative;
+  padding: 0.25rem 0;
+  transition: color 0.2s;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--matcha, #74B72E);
+  transition: width 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.navLink:hover {
+  color: var(--matcha-dark, #4a7d1b);
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.actionBtn,
+.cartBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.55rem;
+  border-radius: 50%;
+  color: var(--brown-dark, #2C1E16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  position: relative;
+}
+
+.actionBtn:hover,
+.cartBtn:hover {
+  background: rgba(44, 30, 22, 0.06);
+  transform: scale(1.05);
+}
+
+.cartBadge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: var(--matcha, #74B72E);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.bump {
+  animation: cartBump 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes cartBump {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.shopBtn {
+  font-size: 0.72rem;
+  padding: 0.65rem 1.25rem;
+  letter-spacing: 0.12em;
+}

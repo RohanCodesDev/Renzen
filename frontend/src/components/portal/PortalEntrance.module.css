@@ -1,0 +1,409 @@
+.portalWrapper {
+  min-height: 100vh;
+  background: #140E0A;
+  color: #FFFDD0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  font-family: var(--font-display, sans-serif);
+}
+
+/* ── SPLASH OVERLAY ─────────────────────────────────────── */
+.splashOverlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #26170E 0%, #0F0A07 100%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.8s;
+  cursor: pointer;
+}
+
+.splashFadeOut {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splashContent {
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.splashBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #D4AF37;
+  padding: 0.35rem 1rem;
+  border-radius: 99px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.splashTitle {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #FFFDD0;
+}
+
+.splashGold {
+  color: #E2A04F;
+  background: linear-gradient(135deg, #FFE898 0%, #D4AF37 50%, #C2843A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.splashSubtitle {
+  font-size: 1.05rem;
+  color: rgba(255, 253, 208, 0.75);
+  line-height: 1.6;
+  max-width: 520px;
+}
+
+.splashLoader {
+  width: 160px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.splashBar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #74B72E, #E2A04F);
+  animation: loadProgress 2.2s linear forwards;
+}
+
+@keyframes loadProgress {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+.skipBtn {
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  color: rgba(255, 253, 208, 0.5);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.skipBtn:hover {
+  color: #FFFDD0;
+}
+
+/* ── HEADER ─────────────────────────────────────────────── */
+.portalHeader {
+  padding: 1.75rem 2rem 1.25rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(20, 14, 10, 0.95);
+  backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 10;
+}
+
+.brandHeaderInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.houseCrest {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.crestIcon {
+  color: #D4AF37;
+}
+
+.crestSuper {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: rgba(255, 253, 208, 0.5);
+  display: block;
+}
+
+.crestTitle {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: #FFFDD0;
+  margin: 0;
+}
+
+.crestTagline {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 253, 208, 0.6);
+  text-transform: uppercase;
+}
+
+/* ── DUAL GRID ──────────────────────────────────────────── */
+.dualGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+  min-height: calc(100vh - 180px);
+}
+
+.brandCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 4rem 3.5rem;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.brandCard:hover .bgImage {
+  transform: scale(1.04);
+}
+
+.cardBg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.bgImage {
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.overlayRenzen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(14, 22, 10, 0.95) 0%,
+    rgba(14, 22, 10, 0.75) 45%,
+    rgba(14, 22, 10, 0.35) 100%
+  );
+}
+
+.overlayParamanno {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(32, 18, 10, 0.95) 0%,
+    rgba(32, 18, 10, 0.75) 45%,
+    rgba(32, 18, 10, 0.35) 100%
+  );
+}
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 520px;
+}
+
+.brandBadgeRenzen {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  background: rgba(116, 183, 46, 0.2);
+  border: 1px solid rgba(116, 183, 46, 0.45);
+  color: #8CE03E;
+  align-self: flex-start;
+}
+
+.brandBadgeParamanno {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  background: rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: #F3C465;
+  align-self: flex-start;
+}
+
+.brandName {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #FFFDD0;
+}
+
+.brandStatement {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(255, 253, 208, 0.85);
+}
+
+.offeringPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.offeringPills span {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #FFFDD0;
+  backdrop-filter: blur(8px);
+}
+
+.vibeCallout {
+  font-size: 0.75rem;
+  color: rgba(255, 253, 208, 0.65);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.vibeLabel {
+  font-weight: 700;
+  color: #FFFDD0;
+  letter-spacing: 0.1em;
+}
+
+.enterBtnRenzen {
+  margin-top: 0.75rem;
+  background: #74B72E;
+  color: #1A280D !important;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 8px 24px rgba(116, 183, 46, 0.35);
+  align-self: flex-start;
+}
+
+.enterBtnRenzen:hover {
+  background: #8CE03E;
+  transform: translateX(4px);
+  box-shadow: 0 12px 32px rgba(116, 183, 46, 0.5);
+}
+
+.enterBtnParamanno {
+  margin-top: 0.75rem;
+  background: linear-gradient(135deg, #D4AF37 0%, #C2843A 100%);
+  color: #1F120A !important;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.35);
+  align-self: flex-start;
+}
+
+.enterBtnParamanno:hover {
+  background: linear-gradient(135deg, #FFE074 0%, #E2A04F 100%);
+  transform: translateX(4px);
+  box-shadow: 0 12px 32px rgba(212, 175, 55, 0.5);
+}
+
+/* ── FOOTER ─────────────────────────────────────────────── */
+.portalFooter {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #100B08;
+  padding: 1.5rem 2rem;
+}
+
+.footerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.trustIcon {
+  color: #D4AF37;
+  flex-shrink: 0;
+}
+
+.trustItem h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFFDD0;
+  margin-bottom: 0.15rem;
+}
+
+.trustItem p {
+  font-size: 0.75rem;
+  color: rgba(255, 253, 208, 0.6);
+  line-height: 1.4;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .dualGrid {
+    grid-template-columns: 1fr;
+  }
+  .brandCard {
+    padding: 3rem 1.75rem;
+    min-height: 480px;
+  }
+  .footerContainer {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
