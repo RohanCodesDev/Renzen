@@ -64,7 +64,9 @@ export default function ContactWidget() {
             <MessageCircle size={28} />
           </div>
           <div>
-            <h3 className={styles.title}>Contact Renzen</h3>
+            <h3 className={styles.title}>
+              {router.pathname.startsWith('/paramanno') ? 'Paramanna Concierge' : 'Contact Renzen'}
+            </h3>
             <p className={styles.subtitle}>We usually reply within a few hours.</p>
           </div>
         </div>

@@ -1,0 +1,298 @@
+/* ═══════════════════════════════════════════════════════════════
+   PARAMANNA HEADER — Floating Rounded Editorial Navbar
+   Canvas: #F7F3EB | Ink: #231B15 | Accent: #A65229 | Border: #DFD7C8
+   ═══════════════════════════════════════════════════════════════ */
+
+.headerWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  width: 100%;
+  padding: 0.85rem 1.75rem 0;
+  pointer-events: none;
+}
+
+.floatingBar {
+  pointer-events: auto;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.35rem;
+  border-radius: 16px;
+  background: rgba(247, 243, 235, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(223, 215, 200, 0.9);
+  box-shadow: 0 6px 24px rgba(35, 27, 21, 0.05);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.floatingBarScrolled {
+  background: rgba(247, 243, 235, 0.94);
+  border-color: #DFD7C8;
+  box-shadow: 0 10px 30px rgba(35, 27, 21, 0.09);
+}
+
+.headerRow {
+  height: 64px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navWrap {
+  justify-self: start;
+}
+
+/* ── CENTER: EDITORIAL WORDMARK ────────────────────────────── */
+.wordmarkWrap {
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+}
+
+.wordmark {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.32rem, 1.95vw, 1.62rem);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #231B15;
+  text-decoration: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ── RIGHT: TYPOGRAPHIC + ICON UTILITIES ───────────────────── */
+.actionsRow {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.utilityBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.46rem 0.8rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(35, 27, 21, 0.78);
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.utilityBtn:hover,
+.utilityBtnActive {
+  color: #231B15;
+  background: #EFE9DD;
+}
+
+.bagBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  background: #231B15;
+  color: #F7F3EB;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.48rem 0.95rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.71rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.bagBtn:hover {
+  background: #A65229;
+}
+
+/* ── EXPANDABLE MINIMAL BOTTOM-BORDERED SEARCH BAR ─────────── */
+.searchDrawer {
+  border-top: 1px solid #DFD7C8;
+  padding: 0.9rem 0 1.15rem;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 580px;
+  margin: 0 auto;
+  border-bottom: 1px solid #231B15;
+  padding-bottom: 0.45rem;
+}
+
+.searchIcon {
+  color: #6B5C4F;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem;
+  color: #231B15;
+  padding: 0.2rem 0;
+}
+
+.searchInput::placeholder {
+  color: #8A7A6B;
+}
+
+.clearBtn {
+  background: none;
+  border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6B5C4F;
+  cursor: pointer;
+  padding: 0.2rem 0;
+}
+
+.clearBtn:hover {
+  color: #231B15;
+}
+
+.searchDropdown {
+  max-width: 580px;
+  margin: 0.75rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.45rem 1.5rem;
+}
+
+.searchItem {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.42rem 0;
+  border-bottom: 1px solid #DFD7C8;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.82rem;
+  color: #231B15;
+  text-decoration: none;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.searchItem:hover {
+  color: #A65229;
+}
+
+.searchItemTag {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #A65229;
+}
+
+.searchEmpty {
+  max-width: 580px;
+  margin: 0.75rem auto 0;
+  font-size: 0.82rem;
+  color: #8A7A6B;
+}
+
+/* ── MOBILE CONTROLS & DRAWER ──────────────────────────────── */
+.mobileMenuBtn {
+  display: none;
+  justify-self: start;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.42rem 0.7rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #231B15;
+  cursor: pointer;
+}
+
+.mobileMenuBtn:hover {
+  background: #EFE9DD;
+}
+
+.mobileNavPanel {
+  border-top: 1px solid #DFD7C8;
+  padding: 1rem 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mobileNavLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #231B15;
+  text-decoration: none;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0.25rem 0;
+  cursor: pointer;
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .headerWrapper {
+    padding: 0.7rem 1rem 0;
+  }
+
+  .floatingBar {
+    padding: 0 1rem;
+    border-radius: 14px;
+  }
+
+  .headerRow {
+    height: 60px;
+  }
+
+  .navWrap {
+    display: none;
+  }
+
+  .utilityBtn {
+    display: none;
+  }
+
+  .mobileMenuBtn {
+    display: inline-flex;
+  }
+
+  .searchDropdown {
+    grid-template-columns: 1fr;
+  }
+}

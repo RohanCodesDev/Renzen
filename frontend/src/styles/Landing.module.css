@@ -29,9 +29,13 @@
   --mandala-spin-speed: 50s;
   /* Spin animation duration (e.g. 25s = brisk, 50s = serene, 90s = subtle) */
 
+  /* ── 5. SLIDE-UP REVEAL CONTROLS ── */
+  --slide-duration: 1.35s;
+  /* Duration of the upward slide */
+
   min-height: 100vh;
   min-height: 100dvh;
-  width: 100vw;
+  width: 100%;
   background-color: #FAF8F5;
   /* Complete off-white */
   display: flex;
@@ -44,6 +48,16 @@
   position: fixed;
   inset: 0;
   z-index: 999;
+  transform: translateY(0);
+  transition: transform var(--slide-duration) cubic-bezier(0.76, 0, 0.24, 1),
+              box-shadow var(--slide-duration) cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+
+.landingSlidUp {
+  transform: translateY(-100%) !important;
+  pointer-events: none;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55);
 }
 
 .centerContent {
@@ -61,8 +75,8 @@
 
 /* ── 1. "Welcome to" Styling ── */
 .welcomeText {
-  font-family: var(--font-italic, 'Playfair Display', Georgia, serif);
-  font-style: italic;
+  font-family: 'Product Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-style: normal;
   font-weight: 400;
   font-size: var(--size-welcome);
   color: #6E5F52;

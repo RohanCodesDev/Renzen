@@ -109,8 +109,8 @@ export default function CartDrawer() {
           <div className={styles.headerLeft}>
             <span className={styles.headerEmoji}><ShoppingCart size={19} /></span>
             <div>
-              <h2 className={styles.headerTitle}>Your Cart</h2>
-              <span className={styles.headerSub}>The House of Paramanno</span>
+              <h2 className={styles.headerTitle}>Your Bag</h2>
+              <span className={styles.headerSub}>The House of Paramanna</span>
             </div>
             {totalCount > 0 && (
               <span className={styles.headerCount}>{totalCount}</span>
@@ -150,7 +150,7 @@ export default function CartDrawer() {
               <span className={styles.emptyEmoji}><Leaf size={44} /></span>
               <p className={styles.emptyTitle}>Your cart is empty</p>
               <p className={styles.emptySubtitle}>
-                Explore artisan beverages from <strong>Renzen</strong> or sacred harvest from <strong>Paramanno</strong>.
+                Explore artisan beverages from <strong>Renzen</strong> or sacred harvest from <strong>Paramanna</strong>.
               </p>
               <button className={`btn btn-primary ${styles.emptyBtn}`} onClick={closeCart}>
                 Start Shopping <ArrowRight size={16} />
@@ -173,7 +173,7 @@ export default function CartDrawer() {
                   <div className={styles.brandTagRow}>
                     <span className={product.brand === 'renzen' ? styles.tagRenzen : styles.tagParamanno}>
                       {product.brand === 'renzen' ? <Leaf size={10} /> : <Sun size={10} />}
-                      {product.brand === 'renzen' ? 'Renzen' : 'Paramanno'}
+                      {product.brand === 'renzen' ? 'Renzen' : 'Paramanna'}
                     </span>
                     <span className={styles.itemCategory}>{product.category}</span>
                   </div>
@@ -231,7 +231,7 @@ export default function CartDrawer() {
                   <form onSubmit={handleApplyCoupon} className={styles.couponForm}>
                     <input
                       type="text"
-                      placeholder="Coupon (RENZEN20 / PARAMANNO10)"
+                      placeholder="Coupon (RENZEN20 / PARAMANNA10)"
                       value={couponInput}
                       onChange={e => setCouponInput(e.target.value)}
                       className={styles.couponInput}

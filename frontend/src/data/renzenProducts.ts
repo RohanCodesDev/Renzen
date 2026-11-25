@@ -1,25 +1,6 @@
-export interface Product {
-  id: number;
-  brand: 'renzen' | 'paramanno';
-  name: string;
-  subtitle: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  hoverImage?: string;
-  badge?: string;
-  badgeIcon?: React.ReactNode;
-  badgeType?: 'matcha' | 'orange' | 'cream' | 'gold';
-  category: string;
-  subCategory?: string;
-  rating?: number;
-  reviewsCount?: number;
-  tags?: string[];
-  inStock?: boolean;
-  description?: string;
-  flavorNotes?: string[];
-  origin?: string;
-}
+import { Product } from '@/types';
+
+export type { Product };
 
 export const RENZEN_PRODUCTS: Product[] = [
   {

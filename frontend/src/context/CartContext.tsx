@@ -31,6 +31,7 @@ const FREE_SHIPPING_THRESHOLD = 499;
 
 const VALID_COUPONS: Record<string, number> = {
   RENZEN20: 0.20,
+  PARAMANNA10: 0.10,
   PARAMANNO10: 0.10,
   FIRSTORDER: 0.15,
 };
@@ -111,7 +112,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       setAppliedCoupon(clean);
       return { success: true, message: `Coupon ${clean} applied! (${VALID_COUPONS[clean] * 100}% off)` };
     }
-    return { success: false, message: 'Invalid coupon code. Try RENZEN20 or PARAMANNO10' };
+    return { success: false, message: 'Invalid coupon code. Try RENZEN20 or PARAMANNA10' };
   }, []);
 
   const removeCoupon = useCallback(() => {

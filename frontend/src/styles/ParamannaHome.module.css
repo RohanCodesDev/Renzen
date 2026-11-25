@@ -1,0 +1,735 @@
+/* ═══════════════════════════════════════════════════════════════
+   PARAMANNA — SUNLIT PANTRY EDITORIAL STOREFRONT
+   85–90% Warm Parchment (#F7F3EB) & Soft Sand (#EFE9DD)
+   Primary Ink: #231B15 (Deep Espresso) — Primary CTAs & Footer only
+   Accent: #A65229 (Roasted Terracotta)
+   Hairlines: #DFD7C8 (1px warm structural borders)
+   ═══════════════════════════════════════════════════════════════ */
+
+.wrapper {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  background-color: #F7F3EB;
+  color: #231B15;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: clip;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ── 1. HERO SECTION (SUNLIT ASYMMETRIC SPLIT) ─────────────────── */
+.heroSection {
+  position: relative;
+  width: 100%;
+  background-color: #F7F3EB;
+  color: #231B15;
+  border-bottom: 1px solid #DFD7C8;
+}
+
+.heroSplit {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3rem 2rem 3.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 3.5rem;
+}
+
+.heroContentCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.4rem;
+  padding: 1rem 0;
+}
+
+.heroEyebrow {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #A65229;
+  margin: 0;
+}
+
+.heroTitle {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.75rem, 4.4vw, 4.25rem);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: #231B15;
+  margin: 0;
+  max-width: 14ch;
+}
+
+.heroSubtext {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.96rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #5C4E43;
+  max-width: 440px;
+  margin: 0;
+}
+
+.heroCtasRow {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-top: 0.35rem;
+}
+
+.heroPrimaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #F7F3EB;
+  background: #231B15;
+  padding: 1rem 2.1rem;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background-color 0.22s ease;
+}
+
+.heroPrimaryBtn:hover {
+  background: #A65229;
+}
+
+.heroSecondaryLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #231B15;
+  text-decoration: none;
+  padding-bottom: 0.28rem;
+  border-bottom: 1px solid #231B15;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.heroSecondaryLink:hover {
+  color: #A65229;
+  border-color: #A65229;
+}
+
+/* Right Column: Direct Sibling Full-Height Editorial Frame */
+.heroImgFrame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  max-height: 520px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #EFE9DD;
+  border: 1px solid #DFD7C8;
+}
+
+.heroImg {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.heroImgFrame:hover .heroImg {
+  transform: scale(1.025);
+}
+
+/* ── 2. QUIET TRUST LINE ─────────────────────────────────────── */
+.trustStrip {
+  background: #EFE9DD;
+  border-bottom: 1px solid #DFD7C8;
+  padding: 1.05rem 0;
+}
+
+.trustLine {
+  margin: 0;
+  text-align: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #5C4E43;
+}
+
+/* ── SHARED SECTION HEADERS ──────────────────────────────────── */
+.sectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #DFD7C8;
+}
+
+.sectionEyebrow {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #A65229;
+  display: block;
+  margin-bottom: 0.45rem;
+}
+
+.sectionHeading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: #231B15;
+  margin: 0;
+  line-height: 1.08;
+}
+
+/* ── 3. CURATED PROVISIONS (LIGHT CANVAS + 1px HAIRLINES) ────── */
+.bestSellingSection {
+  padding: 6rem 0;
+  background: #F7F3EB;
+  border-bottom: 1px solid #DFD7C8;
+}
+
+.bestSellingSection .sectionHeader {
+  max-width: 1152px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.filterTabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  padding: 0.28rem;
+  background: #FAF7F1;
+  border: 1px solid #DFD7C8;
+  border-radius: 9999px;
+}
+
+.filterTab {
+  position: relative;
+  background: none;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.45rem 0.95rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.71rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7D6D5E;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.filterTab:hover {
+  color: #231B15;
+}
+
+.filterTabActive {
+  color: #231B15;
+  font-weight: 600;
+}
+
+.filterTabPill {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: #EFE9DD;
+  border: 1px solid #DFD7C8;
+  z-index: 0;
+}
+
+.filterTabLabel {
+  position: relative;
+  z-index: 1;
+}
+
+.productGrid {
+  max-width: 1152px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3rem 2rem;
+}
+
+.productCard {
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.productImgBox {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  background: #EFE9DD;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.productImg {
+  object-fit: cover;
+  transition: transform 0.5s ease-out;
+}
+
+.productCard:hover .productImg {
+  transform: scale(1.03);
+}
+
+.productTitleRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.productName {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.32rem;
+  font-weight: 600;
+  color: #231B15;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.productPrice {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #231B15;
+  flex-shrink: 0;
+}
+
+.productWeightText {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.76rem;
+  color: rgba(35, 27, 21, 0.6);
+  margin: 0.25rem 0 1.05rem;
+}
+
+.addToBagBtn {
+  width: 100%;
+  margin-top: auto;
+  padding: 0.68rem 1rem;
+  background: transparent;
+  color: #231B15;
+  border: 1px solid rgba(35, 27, 21, 0.25);
+  border-radius: 2px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.69rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.addToBagBtn:hover {
+  background: #231B15;
+  color: #F7F3EB;
+  border-color: #231B15;
+}
+
+.addToBagBtnAdded {
+  background: #4E5E42;
+  color: #F7F3EB;
+  border-color: #4E5E42;
+}
+
+.addToBagBtnAdded:hover {
+  background: #4E5E42;
+  border-color: #4E5E42;
+}
+
+.emptyFilterState {
+  padding: 3rem 0;
+  text-align: center;
+  color: #6B5C4F;
+  font-size: 0.92rem;
+}
+
+/* ── 4. EDITORIAL HERITAGE STORY (SOFT SAND SURFACE) ─────────── */
+.heritageSection {
+  padding: 6.5rem 0;
+  background: #EFE9DD;
+  border-bottom: 1px solid #DFD7C8;
+}
+
+.heritageGrid {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  align-items: center;
+  gap: 4.5rem;
+}
+
+.heritageVisual {
+  position: relative;
+  aspect-ratio: 4 / 4.2;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid #DFD7C8;
+  background: #E5DEC9;
+}
+
+.heritageStoryCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.heritageLead {
+  font-size: 0.98rem;
+  line-height: 1.78;
+  color: #4D4036;
+  margin: 0;
+  max-width: 520px;
+}
+
+.heritagePillars {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #DFD7C8;
+}
+
+.heritagePillar {
+  padding: 1.35rem 0;
+  border-bottom: 1px solid #DFD7C8;
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 1.25rem;
+  align-items: baseline;
+}
+
+.pillarHeading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #231B15;
+  margin: 0;
+}
+
+.pillarBody {
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: #5C4E43;
+  margin: 0;
+}
+
+/* ── 5. SISTER ATELIER CALLOUT (SOFT SAND + HAIRLINE BORDER) ─── */
+.renzenBannerSection {
+  padding: 5.5rem 0;
+  background: #F7F3EB;
+}
+
+.renzenBannerInner {
+  background: #EFE9DD;
+  border: 1px solid #DFD7C8;
+  border-radius: 2px;
+  padding: 3.25rem 3.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  color: #231B15;
+}
+
+.renzenBannerText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 600px;
+}
+
+.renzenBannerTag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #A65229;
+}
+
+.renzenBannerTitle {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.9rem, 2.8vw, 2.55rem);
+  font-weight: 500;
+  color: #231B15;
+  margin: 0;
+  line-height: 1.12;
+}
+
+.renzenBannerDesc {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #5C4E43;
+  margin: 0;
+}
+
+.renzenBannerBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #F7F3EB;
+  background: #231B15;
+  padding: 0.95rem 2rem;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background-color 0.22s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.renzenBannerBtn:hover {
+  background: #A65229;
+}
+
+/* ── 7. COMPACT SINGLE-ROW FOOTER (DEEP ESPRESSO #231B15) ────── */
+.footer {
+  background: #231B15;
+  color: rgba(247, 243, 235, 0.76);
+  padding: 3.75rem 0 2.25rem;
+}
+
+.footerTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(247, 243, 235, 0.12);
+}
+
+.footerBrandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.footerBrandName {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #F7F3EB;
+  margin: 0;
+}
+
+.footerTagline {
+  font-size: 0.78rem;
+  color: rgba(247, 243, 235, 0.6);
+  margin: 0;
+}
+
+.footerLinksRow {
+  display: flex;
+  align-items: center;
+  gap: 1.85rem;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footerLink {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: rgba(247, 243, 235, 0.76);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footerLink:hover {
+  color: #F7F3EB;
+}
+
+.newsletterWrap {
+  min-width: 280px;
+  max-width: 340px;
+  flex: 1;
+}
+
+.newsletterForm {
+  display: flex;
+  border-bottom: 1px solid rgba(247, 243, 235, 0.32);
+  padding-bottom: 0.3rem;
+  gap: 0.5rem;
+}
+
+.newsletterInput {
+  flex: 1;
+  height: 36px;
+  background: transparent;
+  border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.82rem;
+  color: #F7F3EB;
+  outline: none;
+}
+
+.newsletterInput::placeholder {
+  color: rgba(247, 243, 235, 0.48);
+}
+
+.newsletterBtn {
+  height: 36px;
+  padding: 0 1rem;
+  background: transparent;
+  color: #F7F3EB;
+  border: 1px solid rgba(247, 243, 235, 0.35);
+  border-radius: 2px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.newsletterBtn:hover {
+  background: #A65229;
+  border-color: #A65229;
+}
+
+.newsletterConfirm {
+  color: #EFE9DD;
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+.footerBottom {
+  padding-top: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: rgba(247, 243, 235, 0.52);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footerTrustRow {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  flex-wrap: wrap;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .heroSplit {
+    gap: 2.5rem;
+    padding: 2.75rem 1.75rem 3rem;
+  }
+
+  .heroImgFrame {
+    min-height: 360px;
+  }
+
+  .heritageGrid {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+  }
+
+  .heritageVisual {
+    aspect-ratio: 16 / 10;
+  }
+
+  .renzenBannerInner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2.5rem 2rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  .heroSplit {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2.25rem 1.25rem 2.75rem;
+  }
+
+  .heroImgFrame {
+    min-height: 280px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .heroCtasRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.15rem;
+  }
+
+  .bestSellingSection,
+  .heritageSection {
+    padding: 4.5rem 0;
+  }
+
+  .renzenBannerSection {
+    padding: 0 0 4.5rem;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .heritagePillar {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .productGrid {
+    grid-template-columns: 1fr;
+  }
+}

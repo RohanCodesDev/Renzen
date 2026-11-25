@@ -4,11 +4,16 @@ import Image from 'next/image';
 import { ArrowRight, Leaf, Sparkles, Sun, ShieldCheck, Heart, Coffee, Droplets } from 'lucide-react';
 import styles from './PortalEntrance.module.css';
 
-export default function PortalEntrance() {
-  const [splashVisible, setSplashVisible] = useState(true);
+interface PortalEntranceProps {
+  showSplash?: boolean;
+}
+
+export default function PortalEntrance({ showSplash = false }: PortalEntranceProps) {
+  const [splashVisible, setSplashVisible] = useState(showSplash);
   const [fadingOut, setFadingOut] = useState(false);
 
   useEffect(() => {
+    if (!showSplash) return;
     // Welcome splash stays for 2.2 seconds then smoothly dissolves
     const timer = setTimeout(() => {
       setFadingOut(true);
@@ -16,7 +21,7 @@ export default function PortalEntrance() {
     }, 2200);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [showSplash]);
 
   const handleSkipSplash = () => {
     setFadingOut(true);
